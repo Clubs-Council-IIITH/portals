@@ -68,8 +68,8 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <div className="background" style={{ backgroundColor: '#000000', minHeight: '100vh' }}>
-        <AppBar position="static" sx={{ backgroundColor: '#420303', height:'10vh' }}>
+      <div className="background" style={{ backgroundColor: '#EBD3F8', minHeight: '100vh' }}>
+        <AppBar position="static" sx={{ backgroundColor: '#2E073F', height:'10vh' }}>
           <Toolbar>
             <Box
               component="img"
@@ -86,7 +86,7 @@ function App() {
         </AppBar>
         
         <Box sx={{ marginBottom: '30px', marginLeft: '15vw', marginTop: '2vw' }}>
-          <Typography variant="h5" gutterBottom sx={{ textAlign: 'center', marginBottom: '20px', marginRight: '15vw', color: 'white' }}>
+          <Typography variant="h5" gutterBottom sx={{ textAlign: 'center', marginBottom: '20px', marginRight: '15vw', color: '#2E073F' }}>
             Popular Portals
           </Typography>
           <Grid container spacing={2}>
@@ -101,7 +101,7 @@ function App() {
                     textAlign: 'center',
                     padding: '20px',
                     position: 'center',
-                    height: '13vh'
+                    height: '8vh'
                   }}
                 >
                   <CardContent>
@@ -115,16 +115,16 @@ function App() {
                       sx={{
                         padding: '10px',
                         color: 'white',
-                        backgroundColor: '#BO3060',
+                        backgroundColor: '#AD49E1',
                         '&:hover': {
-                          backgroundColor: '#D03D56', 
+                          backgroundColor: '#7A1CAC', 
                         },
                       }}
                     >
                       {portal.name}
                       {portal.vpnIcon}
                     </Button>
-                    <Typography variant="body2" sx={{ color: 'white', marginTop: '10px' }}>
+                    <Typography variant="body2" sx={{ color: '#2E073F', marginTop: '10px' }}>
                       {portal.description}
                     </Typography>
                   </CardContent>
@@ -148,17 +148,17 @@ function App() {
                 <Card
                   sx={{
                     backgroundColor: 'rgba(255, 255, 255, 0.1)',
-                    boxShadow: 'none',
+                    boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
                     borderRadius: '10px',
                     border: '1px solid rgba(255, 255, 255, 0.3)',
                     textAlign: 'center',
                     padding: '20px', 
-                    height: '35vh',
+                    height: '25vh',
                     marginLeft: '0.5vw',
                   }}
                 >
                   <CardContent>
-                    <Typography variant="h6" gutterBottom sx={{ color: 'white' }}>
+                    <Typography variant="h6" gutterBottom sx={{ color: '#2E073F' }}>
                       {category.title}
                     </Typography>
                     {category.links.map((link, i) => (
@@ -173,9 +173,9 @@ function App() {
                           sx={{
                             padding: '10px',
                             color: 'white',
-                            backgroundColor: '#D03D56',
+                            backgroundColor: '#AD49E1',
                             '&:hover': {
-                              backgroundColor: '#420303', 
+                              backgroundColor: '#7A1CAC', 
                             },
                           }}
                         >
@@ -192,7 +192,7 @@ function App() {
         </Container>
 
         <Box sx={{ marginBottom: '30px', marginLeft: '34vw', width: '100vw' }}>
-          <Typography variant="h5" gutterBottom sx={{ textAlign: 'center', marginBottom: '20px', marginRight: '69vw', color: 'white' }}>
+          <Typography variant="h5" gutterBottom sx={{ textAlign: 'center', marginBottom: '20px', marginRight: '69vw', color: '#2E073F' }}>
             Miscellaneous
           </Typography>
           <Grid container spacing={2}>
@@ -207,7 +207,7 @@ function App() {
                     textAlign: 'center',
                     padding: '20px',
                     position: 'center',
-                    height: '10vh',
+                    height: '8vh',
                     width: '25vh',
                   }}
                 >
@@ -222,15 +222,15 @@ function App() {
                       sx={{
                         padding: '10px',
                         color: 'white',
-                        backgroundColor: '#BO3060',
+                        backgroundColor: '#AD49E1',
                         '&:hover': {
-                          backgroundColor: '#D03D56', 
+                          backgroundColor: '#7A1CAC', 
                         },
                       }}
                     >
                       {portal.name}
                     </Button>
-                    <Typography variant="body2" sx={{ color: 'white', marginTop: '10px' }}>
+                    <Typography variant="body2" sx={{ color: '#2E073F', marginTop: '10px' }}>
                       {portal.description}
                     </Typography>
                   </CardContent>
@@ -242,7 +242,7 @@ function App() {
 
         <Box
           sx={{
-            backgroundColor: '#420303',
+            backgroundColor: '#2E073F',
             color: 'white',
             padding: '10px 0',
             textAlign: 'center',
