@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
+
 import { Container, Grid, Card, CardContent, Typography, Button, Box, Avatar, AppBar, Toolbar } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import SchoolIcon from '@mui/icons-material/School';
@@ -10,20 +11,68 @@ import PeopleIcon from '@mui/icons-material/People';
 import HomeIcon from '@mui/icons-material/Home';
 import SelfImprovementIcon from '@mui/icons-material/SelfImprovement';
 import VpnLockIcon from '@mui/icons-material/VpnLock';
-
-
-const theme = createTheme({
-  palette: {
-    primary: {
-      main: '#420303', 
-    },
-    secondary: {
-      main: '#420303',
-    },
-  },
-});
+import {Divider, Switch} from '@mui/material';
+import { useMediaQuery } from '@mui/material';
+// const theme = createTheme({
+//   palette: {
+//     primary: {
+//       main: '#420303', 
+//     },
+//     secondary: {
+//       main: '#420303',
+//     },
+//   },
+// });
 
 function App() {
+
+  const [darkMode, setDarkMode] = useState(false); // State to toggle theme
+
+  const lightTheme = createTheme({
+    palette: {
+      mode: 'light',
+      primary: {
+        main: '#5F6F65', 
+        secondary: '#2F3645',
+        light: '#808D7C',
+        lighter: '#939185',
+      },
+      background: {
+        default: '#F8EDED',
+        paper: '#ffffff',
+      },
+    },
+    typography: {
+      fontFamily: 'Tahoma, Arial',
+    },
+  });
+
+  const darkTheme = createTheme({
+    palette: {
+      mode: 'dark',
+      primary: {
+        main: '#bb86fc',
+      },
+      background: {
+        default: '#121212',
+        paper: '#1d1d1d',
+      },
+      text: {
+        primary: '#ffffff',
+        secondary: '#aaaaaa',
+      },
+    },
+    typography: {
+      fontFamily: 'Tahoma, Arial',
+    },
+  });
+
+  const theme = darkMode ? darkTheme : lightTheme;
+
+  const toggleTheme = () => {
+    setDarkMode(!darkMode);
+  };
+  const isMobile = useMediaQuery('(max-width:600px)');
   const linkCategories = [
     {
       title: 'Academics',
@@ -62,46 +111,54 @@ function App() {
   ];
 
   const Miscellaneous = [
-    { name: 'IT Self Help', url: 'https://self-help.iiit.ac.in/', icon: <PeopleIcon /> },
-    { name: 'Password Reset ( LDAP/802.1x )', url: 'https://passwordreset.iiit.ac.in/', icon: <PeopleIcon /> },
+    { name: 'IT Self Help', url: 'https://self-help.iiit.ac.in/', icon: <PeopleIcon />, description: 'IT help website' },
+    { name: 'Password Reset', url: 'https://passwordreset.iiit.ac.in/', icon: <PeopleIcon />, description:'Password Reset' },
   ];
+
 
   return (
     <ThemeProvider theme={theme}>
-      <div className="background" style={{ backgroundColor: '#EBD3F8', minHeight: '100vh' }}>
-        <AppBar position="static" sx={{ backgroundColor: '#2E073F', height:'10vh' }}>
+      <div className="background" style={{ backgroundColor: theme.palette.background.default ,maxWidth:'100vw',overflow:'hidden'}}>
+      <AppBar position="static" sx={{ backgroundColor: theme.palette.background.default, height: 'auto' }}>
           <Toolbar>
             <Box
               component="img"
-              src="/iiit-logo-white.png"
+              src={darkMode? '/iiit-logo-white.png':'/iiith_logo.png'}
               alt="Logo"
               sx={{
                 marginTop: 1,
                 marginRight: 2,
-                width: '8vw',  
+                width: isMobile?'40vw':'8vw',  
                 height: 'auto', 
               }}
             />
           </Toolbar>
+          <Switch checked={darkMode} onChange={toggleTheme} sx={{ marginLeft: 'auto' }} />
+            {/* <Typography sx={{ marginLeft: 'auto', color: theme.palette.text.primary }}>
+              {darkMode ? 'Dark Mode' : 'Light Mode'}
+            </Typography> */}
         </AppBar>
         
-        <Box sx={{ marginBottom: '30px', marginLeft: '15vw', marginTop: '2vw' }}>
-          <Typography variant="h5" gutterBottom sx={{ textAlign: 'center', marginBottom: '20px', marginRight: '15vw', color: '#2E073F' }}>
+        <Box sx={{ marginBottom: '30px', marginLeft: isMobile? '0vw':'15vw', marginTop: '2vw', height:'auto' }}>
+          <Typography variant="h5" gutterBottom sx={{ textAlign: 'center', marginBottom: '20px', fontFamily: 'Georgia', marginRight: isMobile? '3vw':'15vw', color: theme.palette.text.primary }}>
             Popular Portals
           </Typography>
+            
           <Grid container spacing={2}>
             {popularPortals.map((portal, index) => (
               <Grid item xs={12} sm={2} key={index}>
                 <Card
                   sx={{
-                    backgroundColor: 'rgba(255, 255, 255, 0.1)', 
+                    backgroundColor: theme.palette.background.paper,
                     boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
-                    borderRadius: '10px',
-                    border: '1px solid rgba(255, 255, 255, 0.5)',
+                    borderRadius: '10px', 
+                    border: `1px solid ${theme.palette.background.default}`,
                     textAlign: 'center',
                     padding: '20px',
-                    position: 'center',
-                    height: '8vh'
+                    paddingBottom: '0vh',
+                    height: '100%',
+                    marginLeft: isMobile? '13vw':'0vw',
+                    width: isMobile? '60vw':'10vw',
                   }}
                 >
                   <CardContent>
@@ -115,24 +172,27 @@ function App() {
                       sx={{
                         padding: '10px',
                         color: 'white',
-                        backgroundColor: '#AD49E1',
+                        backgroundColor: theme.palette.primary.main,
                         '&:hover': {
-                          backgroundColor: '#7A1CAC', 
+                          backgroundColor: theme.palette.primary.light,
                         },
                       }}
                     >
                       {portal.name}
                       {portal.vpnIcon}
                     </Button>
-                    <Typography variant="body2" sx={{ color: '#2E073F', marginTop: '10px' }}>
+                    <Typography variant="body1" sx={{ color: theme.palette.text.secondary, fontFamily: 'Times New Roman', marginTop: '10px' }}>
                       {portal.description}
                     </Typography>
                   </CardContent>
                 </Card>
               </Grid>
             ))}
+           
           </Grid>
         </Box>
+        
+        <Divider sx={{ bgcolor: 'silver', width: '75vw', margin: '2vh auto', marginTop:'7vh' }} />
 
         <Container
           maxWidth="lg"
@@ -140,6 +200,8 @@ function App() {
             backgroundColor: 'rgba(255, 255, 255, 0.01)', 
             borderRadius: '10px',
             padding: '30px',
+            height: 'auto',
+            
           }}
         >
           <Grid container spacing={3} sx={{ borderSpacing: '20px' }}>
@@ -147,18 +209,19 @@ function App() {
               <Grid item xs={12} sm={4} key={index} sx={{ padding: '0 10px' }}>
                 <Card
                   sx={{
-                    backgroundColor: 'rgba(255, 255, 255, 0.1)',
+                    backgroundColor: theme.palette.background.paper,
                     boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
                     borderRadius: '10px',
-                    border: '1px solid rgba(255, 255, 255, 0.3)',
+                    border: `1px solid ${theme.palette.background.default}`,
                     textAlign: 'center',
-                    padding: '20px', 
-                    height: '25vh',
+                    padding: '10px',
+                    paddingBottom: '20px', 
+                    height: '100%',
                     marginLeft: '0.5vw',
                   }}
                 >
                   <CardContent>
-                    <Typography variant="h6" gutterBottom sx={{ color: '#2E073F' }}>
+                    <Typography variant="h5" gutterBottom sx={{ color: theme.palette.text.primary, fontFamily:'Tahoma', marginBottom: '2vh' }}>
                       {category.title}
                     </Typography>
                     {category.links.map((link, i) => (
@@ -173,7 +236,7 @@ function App() {
                           sx={{
                             padding: '10px',
                             color: 'white',
-                            backgroundColor: '#AD49E1',
+                            backgroundColor: '#134B70',
                             '&:hover': {
                               backgroundColor: '#7A1CAC', 
                             },
@@ -191,8 +254,10 @@ function App() {
           </Grid>
         </Container>
 
-        <Box sx={{ marginBottom: '30px', marginLeft: '34vw', width: '100vw' }}>
-          <Typography variant="h5" gutterBottom sx={{ textAlign: 'center', marginBottom: '20px', marginRight: '69vw', color: '#2E073F' }}>
+        <Divider sx={{ bgcolor: 'silver', width: '75vw', margin: '4vh auto', marginTop:'4vh' }} />
+
+        <Box sx={{ marginBottom: '30px', marginLeft: isMobile? '10vw':'34vw', width: '100vw',height:'auto'}}>
+          <Typography variant="h5" gutterBottom sx={{ textAlign: 'center', marginBottom: '20px', fontFamily:'Tahoma', marginRight: isMobile? '20vw':'68vw', color: theme.palette.text.secondary }}>
             Miscellaneous
           </Typography>
           <Grid container spacing={2}>
@@ -200,15 +265,19 @@ function App() {
               <Grid item xs={12} sm={2} key={index}>
                 <Card
                   sx={{
-                    backgroundColor: 'rgba(255, 255, 255, 0.1)', 
+                    backgroundColor: theme.palette.background.paper, 
                     boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
                     borderRadius: '10px',
-                    border: '1px solid rgba(255, 255, 255, 0.5)',
+                    border: `1px solid ${theme.palette.background.default}`,
                     textAlign: 'center',
                     padding: '20px',
-                    position: 'center',
-                    height: '8vh',
-                    width: '25vh',
+                    paddingBottom: '0vh',
+                    marginLeft: isMobile? '3vw':'0vw',
+      
+                    height: '100%',
+                    width: isMobile? '60vw':'13vw',
+                    
+                    // overflow: 'hidden',
                   }}
                 >
                   <CardContent>
@@ -222,15 +291,15 @@ function App() {
                       sx={{
                         padding: '10px',
                         color: 'white',
-                        backgroundColor: '#AD49E1',
+                        backgroundColor: theme.palette.primary.secondary,
                         '&:hover': {
-                          backgroundColor: '#7A1CAC', 
+                          backgroundColor: theme.palette.primary.lighter, 
                         },
                       }}
                     >
                       {portal.name}
                     </Button>
-                    <Typography variant="body2" sx={{ color: '#2E073F', marginTop: '10px' }}>
+                    <Typography variant="body2" sx={{ color: theme.palette.text.secondary, fontFamily:'Tahoma', marginTop: '10px' }}>
                       {portal.description}
                     </Typography>
                   </CardContent>
@@ -242,7 +311,7 @@ function App() {
 
         <Box
           sx={{
-            backgroundColor: '#2E073F',
+            backgroundColor: theme.palette.background.default,
             color: 'white',
             padding: '10px 0',
             textAlign: 'center',
@@ -253,7 +322,7 @@ function App() {
             height: '10vh',
           }}
         >
-          <Typography variant="body1">
+          <Typography variant="body1" sx={{color:theme.palette.text.secondary}}>
             © 2024 IIIT Hyderabad Portals Website. All rights reserved.
           </Typography>
         </Box>
