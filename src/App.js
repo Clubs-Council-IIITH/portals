@@ -13,6 +13,8 @@ import SelfImprovementIcon from '@mui/icons-material/SelfImprovement';
 import VpnLockIcon from '@mui/icons-material/VpnLock';
 import {Divider, Switch} from '@mui/material';
 import { useMediaQuery } from '@mui/material';
+import Brightness4Icon from '@mui/icons-material/Brightness4';
+import Brightness7Icon from '@mui/icons-material/Brightness7';
 // const theme = createTheme({
 //   palette: {
 //     primary: {
@@ -73,46 +75,50 @@ function App() {
     setDarkMode(!darkMode);
   };
   const isMobile = useMediaQuery('(max-width:600px)');
+  const isTablet = useMediaQuery('(min-width:601px) and (max-width:900px)');
+  const isBigTablet= useMediaQuery('(min-width:901px) and (max-width:1280px)');
+  const is1024 = useMediaQuery('(width:1024px)');
+  const is1280 = useMediaQuery('(width:1280px)');
   const linkCategories = [
     {
       title: 'Academics',
       links: [
-        { name: 'Courses', url: 'https://courses.iiit.ac.in', icon: <SchoolIcon /> },
-        { name: 'Old Courses Portal', url: 'https://courses.iiit.ac.in', icon: <MenuBookIcon /> },
-        { name: 'Intranet', url: 'https://intranet.iiit.ac.in', icon: <WifiIcon /> },
-        { name: 'Library', url: 'https://library.iiit.ac.in', icon: <LibraryBooksIcon /> },
+        { name: 'Courses', url: 'https://courses.iiit.ac.in', icon: <SchoolIcon />,vpnIcon: <VpnLockIcon />, },
+        { name: 'Old Courses Portal', url: 'https://courses.iiit.ac.in', icon: <MenuBookIcon />,vpnIcon: <VpnLockIcon />, },
+        { name: 'Intranet', url: 'https://intranet.iiit.ac.in', icon: <WifiIcon />,vpnIcon: <VpnLockIcon />, },
+        { name: 'Library', url: 'https://library.iiit.ac.in', icon: <LibraryBooksIcon />,vpnIcon: <VpnLockIcon />, },
       ],
     },
     {
       title: 'Research',
       links: [
-        { name: 'Research Centres', url: 'https://web2py.iiit.ac.in/research_centres', icon: <ResearchIcon /> },
-        { name: 'Publications Portal', url: 'https://web2py.iiit.ac.in/research_centres/publications/', icon: <LibraryBooksIcon /> },
-        { name: 'Seminar', url: 'https://web2py.iiit.ac.in/seminar/default/home', icon: <SchoolIcon /> },
+        { name: 'Research Centres', url: 'https://web2py.iiit.ac.in/research_centres', icon: <ResearchIcon />,vpnIcon: <VpnLockIcon />, },
+        { name: 'Publications Portal', url: 'https://web2py.iiit.ac.in/research_centres/publications/', icon: <LibraryBooksIcon />,vpnIcon: <VpnLockIcon />, },
+        { name: 'Seminar', url: 'https://web2py.iiit.ac.in/seminar/default/home', icon: <SchoolIcon />,vpnIcon: <VpnLockIcon />, },
       ],
     },
     {
       title: 'Campus Life',
       links: [
-        { name: 'Alumni', url: 'https://alumni.iiit.ac.in/', icon: <PeopleIcon /> },
-        { name: 'Blog', url: 'https://blogs.iiit.ac.in/', icon: <HomeIcon /> },
-        { name: 'Courier', url: 'https://courier.iiit.ac.in/portal/main1.php', icon: <SelfImprovementIcon /> },
-        { name: 'Mess', url: 'https://mess.iiit.ac.in', icon: <SelfImprovementIcon /> },
+        { name: 'Alumni', url: 'https://alumni.iiit.ac.in/', icon: <PeopleIcon />,vpnIcon: <VpnLockIcon />, },
+        { name: 'Blog', url: 'https://blogs.iiit.ac.in/', icon: <HomeIcon />,vpnIcon: <VpnLockIcon />, },
+        { name: 'Courier', url: 'https://courier.iiit.ac.in/portal/main1.php', icon: <SelfImprovementIcon />,vpnIcon: <VpnLockIcon />, },
+        { name: 'Mess', url: 'https://mess.iiit.ac.in', icon: <SelfImprovementIcon />,vpnIcon: <VpnLockIcon />, },
       ],
     },
   ];
 
   const popularPortals = [
     { name: 'IMS', url: 'https://ims.iiit.ac.in', icon: <SchoolIcon />,vpnIcon: <VpnLockIcon /> , description: 'Integrated Management System' },
-    { name: 'Intranet', url: 'https://intranet.iiit.ac.in', icon: <WifiIcon />, description: 'Internal Network Access' },
-    { name: 'Mess', url: 'https://mess.iiit.ac.in', icon: <SelfImprovementIcon />, description: 'Mess Menu and Services' },
-    { name: 'IT Self Help', url: 'https://self-help.iiit.ac.in/', icon: <PeopleIcon />, description: 'Technical Assistance' },
-    { name: 'Blog', url: 'https://blogs.iiit.ac.in', icon: <HomeIcon />, description: 'Campus Blogs and Stories' },
+    { name: 'Intranet', url: 'https://intranet.iiit.ac.in', icon: <WifiIcon />,vpnIcon: <VpnLockIcon />, description: 'Internal Network Access' },
+    { name: 'Mess', url: 'https://mess.iiit.ac.in', icon: <SelfImprovementIcon />,vpnIcon: <VpnLockIcon />, description: 'Mess Menu and Services' },
+    { name: 'IT Self Help', url: 'https://self-help.iiit.ac.in/', icon: <PeopleIcon />,vpnIcon: <VpnLockIcon />, description: 'Technical Assistance' },
+    { name: 'Blog', url: 'https://blogs.iiit.ac.in', icon: <HomeIcon />,vpnIcon: <VpnLockIcon />, description: 'Campus Blogs and Stories' },
   ];
 
   const Miscellaneous = [
-    { name: 'IT Self Help', url: 'https://self-help.iiit.ac.in/', icon: <PeopleIcon />, description: 'IT help website' },
-    { name: 'Password Reset', url: 'https://passwordreset.iiit.ac.in/', icon: <PeopleIcon />, description:'Password Reset' },
+    { name: 'IT Self Help', url: 'https://self-help.iiit.ac.in/', icon: <PeopleIcon />,vpnIcon: <VpnLockIcon />, description: 'IT help website' },
+    { name: 'Password Reset', url: 'https://passwordreset.iiit.ac.in/', icon: <PeopleIcon />,vpnIcon: <VpnLockIcon />, description:'Password Reset' },
   ];
 
 
@@ -133,18 +139,19 @@ function App() {
               }}
             />
           </Toolbar>
-          <Switch checked={darkMode} onChange={toggleTheme} sx={{ marginLeft: 'auto' }} />
+          <Switch checked={darkMode} onChange={toggleTheme} icon={<Brightness7Icon/>} checkedIcon={<Brightness4Icon />} sx={{ marginLeft: 'auto' }} />
+          
             {/* <Typography sx={{ marginLeft: 'auto', color: theme.palette.text.primary }}>
               {darkMode ? 'Dark Mode' : 'Light Mode'}
             </Typography> */}
         </AppBar>
         
-        <Box sx={{ marginBottom: '30px', marginLeft: isMobile? '0vw':'15vw', marginTop: '2vw', height:'auto' }}>
-          <Typography variant="h5" gutterBottom sx={{ textAlign: 'center', marginBottom: '20px', fontFamily: 'Georgia', marginRight: isMobile? '3vw':'15vw', color: theme.palette.text.primary }}>
+        <Box sx={{ marginBottom: '30px', marginTop: '2vw', height:'auto',marginLeft:is1024?'-5vw':is1280?'-5vw':isMobile?'auto':isTablet?'-6vw':isBigTablet?'-6vw':'auto',  paddingLeft:isMobile?'auto':isTablet?'auto':isBigTablet?'auto':'5vw', paddingRight:isMobile?'auto':isTablet?'auto':isBigTablet?'auto':'5vw',marginRight:isMobile?'auto':isTablet?'5vw':isBigTablet?'5vw':'5vw' }}>
+          <Typography variant="h5" gutterBottom sx={{ textAlign: 'center', marginBottom: '20px', fontFamily: 'Georgia', marginRight: isMobile? '0vw': isTablet?'-15vw':isBigTablet?'-11vw':'0vw',marginLeft:isMobile?'auto':isTablet?'auto':isBigTablet?'auto':'5vw', color: theme.palette.text.primary }}>
             Popular Portals
           </Typography>
-            
-          <Grid container spacing={2}>
+          
+          <Grid container spacing={is1280?25:isTablet?17:isBigTablet?20:2}>
             {popularPortals.map((portal, index) => (
               <Grid item xs={12} sm={2} key={index}>
                 <Card
@@ -154,11 +161,12 @@ function App() {
                     borderRadius: '10px', 
                     border: `1px solid ${theme.palette.background.default}`,
                     textAlign: 'center',
-                    padding: '20px',
+                    padding:isTablet?'0.1vw':isBigTablet?'0.1vw':'20px',
                     paddingBottom: '0vh',
+                    width: isMobile? '60vw':isTablet?'18vw':isBigTablet?'18vw':'10vw',
                     height: '100%',
-                    marginLeft: isMobile? '13vw':'0vw',
-                    width: isMobile? '60vw':'10vw',
+                    marginLeft: isMobile? '13vw':isTablet?'7vw':isBigTablet?'7vw':'10vw',
+                    marginRight: isMobile? '13vw':isTablet?'5vw':isBigTablet?'5vw':'10vw',
                   }}
                 >
                   <CardContent>
@@ -201,7 +209,10 @@ function App() {
             borderRadius: '10px',
             padding: '30px',
             height: 'auto',
-            
+            marginLeft:isMobile?'1vw':'auto',
+            marginRight:'auto',
+            paddingLeft:'auto',
+            paddingRight:'auto',
           }}
         >
           <Grid container spacing={3} sx={{ borderSpacing: '20px' }}>
@@ -238,7 +249,7 @@ function App() {
                             color: 'white',
                             backgroundColor: '#134B70',
                             '&:hover': {
-                              backgroundColor: '#7A1CAC', 
+                              backgroundColor: '#1A6B8D', 
                             },
                           }}
                         >
@@ -256,59 +267,70 @@ function App() {
 
         <Divider sx={{ bgcolor: 'silver', width: '75vw', margin: '4vh auto', marginTop:'4vh' }} />
 
-        <Box sx={{ marginBottom: '30px', marginLeft: isMobile? '10vw':'34vw', width: '100vw',height:'auto'}}>
-          <Typography variant="h5" gutterBottom sx={{ textAlign: 'center', marginBottom: '20px', fontFamily:'Tahoma', marginRight: isMobile? '20vw':'68vw', color: theme.palette.text.secondary }}>
-            Miscellaneous
-          </Typography>
-          <Grid container spacing={2}>
-            {Miscellaneous.map((portal, index) => (
-              <Grid item xs={12} sm={2} key={index}>
-                <Card
-                  sx={{
-                    backgroundColor: theme.palette.background.paper, 
-                    boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
-                    borderRadius: '10px',
-                    border: `1px solid ${theme.palette.background.default}`,
-                    textAlign: 'center',
-                    padding: '20px',
-                    paddingBottom: '0vh',
-                    marginLeft: isMobile? '3vw':'0vw',
-      
-                    height: '100%',
-                    width: isMobile? '60vw':'13vw',
-                    
-                    // overflow: 'hidden',
-                  }}
-                >
-                  <CardContent>
-                    <Button
-                      variant="contained"
-                      color="primary"
-                      href={portal.url}
-                      target="_blank"
-                      startIcon={portal.icon}
-                      fullWidth
-                      sx={{
-                        padding: '10px',
-                        color: 'white',
-                        backgroundColor: theme.palette.primary.secondary,
-                        '&:hover': {
-                          backgroundColor: theme.palette.primary.lighter, 
-                        },
-                      }}
-                    >
-                      {portal.name}
-                    </Button>
-                    <Typography variant="body2" sx={{ color: theme.palette.text.secondary, fontFamily:'Tahoma', marginTop: '10px' }}>
-                      {portal.description}
-                    </Typography>
-                  </CardContent>
-                </Card>
-              </Grid>
-            ))}
-          </Grid>
-        </Box>
-
+  <Box sx={{ marginBottom: '30px',   height:'auto' }}>
+    <Typography 
+      variant="h5" 
+      gutterBottom 
+      sx={{ 
+        textAlign: 'center', 
+        marginBottom: '20px', 
+        fontFamily: 'Tahoma', 
+        
+        color: theme.palette.text.primary 
+      }}
+    >
+      Miscellaneous
+    </Typography>
+    <Grid container spacing={is1280?40:isTablet ? 25 :isBigTablet?30: 2} sx={{marginLeft:is1280?'-1vw':is1024?'0vw':isTablet?'-2vw':isBigTablet?'-3vw':isMobile?'8.5vw':'33vw'}}>
+              
+      {Miscellaneous.map((portal, index) => (
+        
+      <Grid item xs={12} sm={2} key={index}>
+        
+        <Card
+          sx={{
+            backgroundColor: theme.palette.background.paper,
+            boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
+            borderRadius: '10px',
+            border: `1px solid ${theme.palette.background.default}`,
+            textAlign: 'center',
+            padding: isTablet ? '1.5vw' :isBigTablet?'1.5vw': '20px',  // Adjust for tablet
+            marginLeft: isTablet ? '1vw' :isBigTablet?'1vw': '0vw',  // Adjust for tablet
+            height: '100%',
+            width: isMobile ? '60vw' : isTablet ? '20vw' :isBigTablet?'20vw': '13vw',
+          }}
+        >
+          
+          <CardContent>
+            <Button
+              variant="contained"
+              color="primary"
+              href={portal.url}
+              target="_blank"
+              startIcon={portal.icon}
+              fullWidth
+              sx={{
+                display: 'flex',
+                padding: isTablet ? '1vw' :isBigTablet?'1vw': '10px',
+                color: 'white',
+                backgroundColor: theme.palette.primary.secondary,
+                '&:hover': {
+                  backgroundColor: theme.palette.primary.lighter,
+                },
+              }}
+            >
+              {portal.name}
+              {portal.vpnIcon}
+            </Button>
+            <Typography variant="body2" sx={{ color: theme.palette.text.secondary, fontFamily: 'Tahoma', marginTop: '10px' }}>
+              {portal.description}
+            </Typography>
+          </CardContent>
+        </Card>
+      </Grid>
+  ))}
+</Grid>
+</Box>
         <Box
           sx={{
             backgroundColor: theme.palette.background.default,
