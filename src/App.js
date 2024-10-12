@@ -8,225 +8,74 @@ import {
   Typography,
   Button,
   Box,
-  Avatar,
   AppBar,
   Toolbar,
 } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import SchoolIcon from "@mui/icons-material/School";
-import MenuBookIcon from "@mui/icons-material/MenuBook";
-import WifiIcon from "@mui/icons-material/Wifi";
-import LibraryBooksIcon from "@mui/icons-material/LibraryBooks";
-import ResearchIcon from "@mui/icons-material/Science";
-import PeopleIcon from "@mui/icons-material/People";
-import HomeIcon from "@mui/icons-material/Home";
-import SelfImprovementIcon from "@mui/icons-material/SelfImprovement";
-import VpnLockIcon from "@mui/icons-material/VpnLock";
+
+// import VpnLockIcon from "@mui/icons-material/VpnLock";
 import { Divider, Switch } from "@mui/material";
 import { useMediaQuery } from "@mui/material";
 import Brightness4Icon from "@mui/icons-material/Brightness4";
 import Brightness7Icon from "@mui/icons-material/Brightness7";
-// const theme = createTheme({
-//   palette: {
-//     primary: {
-//       main: '#420303',
-//     },
-//     secondary: {
-//       main: '#420303',
-//     },
-//   },
-// });
+
+import { linkCategories, popularPortals, Miscellaneous } from "./constants";
+
+const lightTheme = createTheme({
+  palette: {
+    mode: "light",
+    primary: {
+      main: "#5F6F65",
+      secondary: "#2F3645",
+      light: "#808D7C",
+      lighter: "#939185",
+    },
+    background: {
+      default: "#F8EDED",
+      paper: "#ffffff",
+    },
+    switch: {
+      main: "rgb(235, 219, 43)",
+    },
+  },
+  typography: {
+    fontFamily: "Tahoma, Arial",
+  },
+});
+
+const darkTheme = createTheme({
+  palette: {
+    mode: "dark",
+    primary: {
+      main: "#bb86fc",
+    },
+    background: {
+      default: "#121212",
+      paper: "#1d1d1d",
+    },
+    text: {
+      primary: "#ffffff",
+      secondary: "#aaaaaa",
+    },
+  },
+  typography: {
+    fontFamily: "Tahoma, Arial",
+  },
+});
 
 function App() {
   const [darkMode, setDarkMode] = useState(false); // State to toggle theme
 
-  const lightTheme = createTheme({
-    palette: {
-      mode: "light",
-      primary: {
-        main: "#5F6F65",
-        secondary: "#2F3645",
-        light: "#808D7C",
-        lighter: "#939185",
-      },
-      background: {
-        default: "#F8EDED",
-        paper: "#ffffff",
-      },
-    },
-    typography: {
-      fontFamily: "Tahoma, Arial",
-    },
-  });
-
-  const darkTheme = createTheme({
-    palette: {
-      mode: "dark",
-      primary: {
-        main: "#bb86fc",
-      },
-      background: {
-        default: "#121212",
-        paper: "#1d1d1d",
-      },
-      text: {
-        primary: "#ffffff",
-        secondary: "#aaaaaa",
-      },
-    },
-    typography: {
-      fontFamily: "Tahoma, Arial",
-    },
-  });
-
   const theme = darkMode ? darkTheme : lightTheme;
-
   const toggleTheme = () => {
     setDarkMode(!darkMode);
   };
+
   const isMobile = useMediaQuery("(max-width:600px)");
   const isTablet = useMediaQuery("(min-width:601px) and (max-width:900px)");
   const isBigTablet = useMediaQuery("(min-width:901px) and (max-width:1280px)");
   const is1024 = useMediaQuery("(width:1024px)");
   const is1280 = useMediaQuery("(width:1280px)");
-  const linkCategories = [
-    {
-      title: "Academics",
-      links: [
-        {
-          name: "Courses",
-          url: "https://courses.iiit.ac.in",
-          icon: <SchoolIcon />,
-          vpnIcon: <VpnLockIcon />,
-        },
-        {
-          name: "Old Courses Portal",
-          url: "https://courses.iiit.ac.in",
-          icon: <MenuBookIcon />,
-          vpnIcon: <VpnLockIcon />,
-        },
-        {
-          name: "Intranet",
-          url: "https://intranet.iiit.ac.in",
-          icon: <WifiIcon />,
-          vpnIcon: <VpnLockIcon />,
-        },
-        {
-          name: "Library",
-          url: "https://library.iiit.ac.in",
-          icon: <LibraryBooksIcon />,
-          vpnIcon: <VpnLockIcon />,
-        },
-      ],
-    },
-    {
-      title: "Research",
-      links: [
-        {
-          name: "Research Centres",
-          url: "https://web2py.iiit.ac.in/research_centres",
-          icon: <ResearchIcon />,
-          vpnIcon: <VpnLockIcon />,
-        },
-        {
-          name: "Publications Portal",
-          url: "https://web2py.iiit.ac.in/research_centres/publications/",
-          icon: <LibraryBooksIcon />,
-          vpnIcon: <VpnLockIcon />,
-        },
-        {
-          name: "Seminar",
-          url: "https://web2py.iiit.ac.in/seminar/default/home",
-          icon: <SchoolIcon />,
-          vpnIcon: <VpnLockIcon />,
-        },
-      ],
-    },
-    {
-      title: "Campus Life",
-      links: [
-        {
-          name: "Alumni",
-          url: "https://alumni.iiit.ac.in/",
-          icon: <PeopleIcon />,
-          vpnIcon: <VpnLockIcon />,
-        },
-        {
-          name: "Blog",
-          url: "https://blogs.iiit.ac.in/",
-          icon: <HomeIcon />,
-          vpnIcon: <VpnLockIcon />,
-        },
-        {
-          name: "Courier",
-          url: "https://courier.iiit.ac.in/portal/main1.php",
-          icon: <SelfImprovementIcon />,
-          vpnIcon: <VpnLockIcon />,
-        },
-        {
-          name: "Mess",
-          url: "https://mess.iiit.ac.in",
-          icon: <SelfImprovementIcon />,
-          vpnIcon: <VpnLockIcon />,
-        },
-      ],
-    },
-  ];
-
-  const popularPortals = [
-    {
-      name: "IMS",
-      url: "https://ims.iiit.ac.in",
-      icon: <SchoolIcon />,
-      vpnIcon: <VpnLockIcon />,
-      description: "Integrated Management System",
-    },
-    {
-      name: "Intranet",
-      url: "https://intranet.iiit.ac.in",
-      icon: <WifiIcon />,
-      vpnIcon: <VpnLockIcon />,
-      description: "Internal Network Access",
-    },
-    {
-      name: "Mess",
-      url: "https://mess.iiit.ac.in",
-      icon: <SelfImprovementIcon />,
-      vpnIcon: <VpnLockIcon />,
-      description: "Mess Menu and Services",
-    },
-    {
-      name: "IT Self Help",
-      url: "https://self-help.iiit.ac.in/",
-      icon: <PeopleIcon />,
-      vpnIcon: <VpnLockIcon />,
-      description: "Technical Assistance",
-    },
-    {
-      name: "Blog",
-      url: "https://blogs.iiit.ac.in",
-      icon: <HomeIcon />,
-      vpnIcon: <VpnLockIcon />,
-      description: "Campus Blogs and Stories",
-    },
-  ];
-
-  const Miscellaneous = [
-    {
-      name: "IT Self Help",
-      url: "https://self-help.iiit.ac.in/",
-      icon: <PeopleIcon />,
-      vpnIcon: <VpnLockIcon />,
-      description: "IT help website",
-    },
-    {
-      name: "Password Reset",
-      url: "https://passwordreset.iiit.ac.in/",
-      icon: <PeopleIcon />,
-      vpnIcon: <VpnLockIcon />,
-      description: "Password Reset",
-    },
-  ];
 
   return (
     <ThemeProvider theme={theme}>
@@ -234,8 +83,10 @@ function App() {
         className="background"
         style={{
           backgroundColor: theme.palette.background.default,
-          maxWidth: "100vw",
+          // maxWidth: "100vw",
           overflow: "hidden",
+          width: "100%",
+          height: "auto",
         }}
       >
         <AppBar
@@ -255,17 +106,17 @@ function App() {
                 marginRight: 2,
                 width: isMobile ? "40vw" : "8vw",
                 height: "auto",
+                marginBottom: "1.5vh",
               }}
             />
+            <Switch
+              checked={darkMode}
+              onChange={toggleTheme}
+              icon={<Brightness7Icon fontSize="small" color="switch" />}
+              checkedIcon={<Brightness4Icon fontSize="small" />}
+              sx={{ marginLeft: "auto" }}
+            />
           </Toolbar>
-          <Switch
-            checked={darkMode}
-            onChange={toggleTheme}
-            icon={<Brightness7Icon />}
-            checkedIcon={<Brightness4Icon />}
-            sx={{ marginLeft: "auto" }}
-          />
-
           {/* <Typography sx={{ marginLeft: 'auto', color: theme.palette.text.primary }}>
               {darkMode ? 'Dark Mode' : 'Light Mode'}
             </Typography> */}
@@ -274,8 +125,8 @@ function App() {
         <Box
           sx={{
             marginBottom: "30px",
-            marginTop: "2vw",
-            height: "auto",
+            marginTop: isMobile ? "5vh" : "2vh",
+            // height: "auto",
             marginLeft: is1024
               ? "-5vw"
               : is1280
@@ -342,7 +193,7 @@ function App() {
             spacing={is1280 ? 25 : isTablet ? 17 : isBigTablet ? 20 : 2}
           >
             {popularPortals.map((portal, index) => (
-              <Grid item xs={12} sm={2} key={index}>
+              <Grid item xs={12} sm={2} key={index} sx={{ marginTop: "20px" }}>
                 <Card
                   sx={{
                     backgroundColor: theme.palette.background.paper,
@@ -380,37 +231,36 @@ function App() {
                       : "10vw",
                   }}
                 >
-                  <CardContent>
-                    <Button
-                      variant="contained"
-                      color="primary"
-                      href={portal.url}
-                      target="_blank"
-                      startIcon={portal.icon}
-                      fullWidth
-                      sx={{
-                        padding: "10px",
-                        color: "white",
-                        backgroundColor: theme.palette.primary.main,
-                        "&:hover": {
-                          backgroundColor: theme.palette.primary.light,
-                        },
-                      }}
-                    >
-                      {portal.name}
-                      {portal.vpnIcon}
-                    </Button>
-                    <Typography
-                      variant="body1"
-                      sx={{
-                        color: theme.palette.text.secondary,
-                        fontFamily: "Times New Roman",
-                        marginTop: "10px",
-                      }}
-                    >
-                      {portal.description}
-                    </Typography>
-                  </CardContent>
+                  {/* <CardContent> */}
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    href={portal.url}
+                    target="_blank"
+                    startIcon={portal.icon}
+                    sx={{
+                      padding: "10px",
+                      color: "white",
+                      backgroundColor: theme.palette.primary.main,
+                      "&:hover": {
+                        backgroundColor: theme.palette.primary.light,
+                      },
+                    }}
+                    fullWidth
+                  >
+                    {portal.name}
+                  </Button>
+                  <Typography
+                    variant="body1"
+                    sx={{
+                      color: theme.palette.text.secondary,
+                      fontFamily: "Times New Roman",
+                      marginTop: "10px",
+                    }}
+                  >
+                    {portal.description}
+                  </Typography>
+                  {/* </CardContent> */}
                 </Card>
               </Grid>
             ))}
@@ -421,7 +271,7 @@ function App() {
           sx={{
             bgcolor: "silver",
             width: "75vw",
-            margin: "2vh auto",
+            margin: "0vh auto",
             marginTop: "7vh",
           }}
         />
@@ -441,7 +291,13 @@ function App() {
         >
           <Grid container spacing={3} sx={{ borderSpacing: "20px" }}>
             {linkCategories.map((category, index) => (
-              <Grid item xs={12} sm={4} key={index} sx={{ padding: "0 10px" }}>
+              <Grid
+                item
+                xs={12}
+                sm={4}
+                key={index}
+                sx={{ padding: "0 10px", marginTop: "20px" }}
+              >
                 <Card
                   sx={{
                     backgroundColor: theme.palette.background.paper,
@@ -475,6 +331,14 @@ function App() {
                           href={link.url}
                           target="_blank"
                           startIcon={link.icon}
+                          // endIcon={
+                          //   link.requiresVPN ? (
+                          //     <VpnLockIcon
+                          //       fontSize={"0.01rem"}
+                          //       sx={{ marginRight: "10px" }}
+                          //     />
+                          //   ) : null
+                          // }
                           fullWidth
                           sx={{
                             padding: "10px",
@@ -485,8 +349,7 @@ function App() {
                             },
                           }}
                         >
-                          <span>{link.name}</span>
-                          {link.vpnIcon}
+                          {link.name}
                         </Button>
                       </Box>
                     ))}
@@ -514,7 +377,6 @@ function App() {
               textAlign: "center",
               marginBottom: "20px",
               fontFamily: "Tahoma",
-
               color: theme.palette.text.primary,
             }}
           >
@@ -523,18 +385,22 @@ function App() {
           <Grid
             container
             spacing={is1280 ? 40 : isTablet ? 25 : isBigTablet ? 30 : 2}
+            // sx={{
+            //   marginLeft: is1280
+            //     ? "-1vw"
+            //     : is1024
+            //     ? "0vw"
+            //     : isTablet
+            //     ? "-2vw"
+            //     : isBigTablet
+            //     ? "-3vw"
+            //     : isMobile
+            //     ? "8.5vw"
+            //     : "33vw",
+            // }}
             sx={{
-              marginLeft: is1280
-                ? "-1vw"
-                : is1024
-                ? "0vw"
-                : isTablet
-                ? "-2vw"
-                : isBigTablet
-                ? "-3vw"
-                : isMobile
-                ? "8.5vw"
-                : "33vw",
+              alignItems: "center",
+              justifyContent: "center",
             }}
           >
             {Miscellaneous.map((portal, index) => (
@@ -551,8 +417,13 @@ function App() {
                       : isBigTablet
                       ? "1.5vw"
                       : "20px", // Adjust for tablet
-                    marginLeft: isTablet ? "1vw" : isBigTablet ? "1vw" : "0vw", // Adjust for tablet
-                    height: "100%",
+                    marginLeft: isTablet ? "1vw" : isBigTablet ? "1vw" : "auto", // Adjust for tablet
+                    marginRight: isTablet
+                      ? "1vw"
+                      : isBigTablet
+                      ? "1vw"
+                      : "auto", // Adjust for tablet
+                    // height: "100%",
                     width: isMobile
                       ? "60vw"
                       : isTablet
@@ -609,7 +480,7 @@ function App() {
             color: "white",
             padding: "10px 0",
             textAlign: "center",
-            marginTop: "50px",
+            marginTop: "20px",
             position: "relative",
             bottom: 0,
             width: "100%",
@@ -617,10 +488,32 @@ function App() {
           }}
         >
           <Typography
-            variant="body1"
-            sx={{ color: theme.palette.text.secondary }}
+            variant="body2"
+            sx={{
+              color: theme.palette.text.secondary,
+              marginLeft: "10px",
+              marginRight: "10px",
+            }}
           >
-            © 2024 IIIT Hyderabad Portals Website. All rights reserved.
+            © 2024, IIIT Hyderabad. All rights reserved.
+            <br />
+            Designed by{" "}
+            <a
+              href="https://github.com/The-Broken-Keyboard"
+              style={{ color: "inherit", "text-decoration": "none" }}
+            >
+              Shreyansh
+            </a>{" "}
+            and{" "}
+            <a
+              href="https://github.com/bhavberi"
+              style={{ color: "inherit", "text-decoration": "none" }}
+            >
+              Bhav
+            </a>{" "}
+            (WebAdmins Team)
+            <br />
+            Page last updated in October, 2024
           </Typography>
         </Box>
       </div>
