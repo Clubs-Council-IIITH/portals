@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+"use client";
 
+import React, { useState } from "react";
 import {
   Container,
   Grid,
@@ -10,17 +11,18 @@ import {
   Box,
   AppBar,
   Toolbar,
+  Divider,
+  Switch,
 } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-
-// import VpnLockIcon from "@mui/icons-material/VpnLock";
-import { Divider, Switch } from "@mui/material";
 import { useMediaQuery } from "@mui/material";
 import Brightness4Icon from "@mui/icons-material/Brightness4";
 import Brightness7Icon from "@mui/icons-material/Brightness7";
 
-import { linkCategories, popularPortals, Miscellaneous } from "./constants";
+import { linkCategories, popularPortals, Miscellaneous } from "@/app/constants";
+import Footer from "@/components/Footer";
 
+// Define themes first
 const lightTheme = createTheme({
   palette: {
     mode: "light",
@@ -63,10 +65,10 @@ const darkTheme = createTheme({
   },
 });
 
-function App() {
+export default function HomeComponent() {
   const [darkMode, setDarkMode] = useState(false); // State to toggle theme
-
   const theme = darkMode ? darkTheme : lightTheme;
+
   const toggleTheme = () => {
     setDarkMode(!darkMode);
   };
@@ -114,7 +116,7 @@ function App() {
               onChange={toggleTheme}
               icon={<Brightness7Icon fontSize="small" color="switch" />}
               checkedIcon={<Brightness4Icon fontSize="small" />}
-              sx={{ marginLeft: "auto" }}
+              sx={{ marginLeft: "auto", transform: "scale(1.5)" }}
             />
           </Toolbar>
           {/* <Typography sx={{ marginLeft: 'auto', color: theme.palette.text.primary }}>
@@ -205,7 +207,7 @@ function App() {
                       ? "0.1vw"
                       : isBigTablet
                       ? "0.1vw"
-                      : "20px",
+                      : "10px",
                     paddingBottom: "0vh",
                     width: isMobile
                       ? "60vw"
@@ -229,6 +231,8 @@ function App() {
                       : isBigTablet
                       ? "5vw"
                       : "10vw",
+                    alignItems: "center",
+                    justifyContent: "center",
                   }}
                 >
                   {/* <CardContent> */}
@@ -474,51 +478,8 @@ function App() {
             ))}
           </Grid>
         </Box>
-        <Box
-          sx={{
-            backgroundColor: theme.palette.background.default,
-            color: "white",
-            padding: "10px 0",
-            textAlign: "center",
-            marginTop: "20px",
-            position: "relative",
-            bottom: 0,
-            width: "100%",
-            height: "10vh",
-          }}
-        >
-          <Typography
-            variant="body2"
-            sx={{
-              color: theme.palette.text.secondary,
-              marginLeft: "10px",
-              marginRight: "10px",
-            }}
-          >
-            © 2024, IIIT Hyderabad. All rights reserved.
-            <br />
-            Designed by{" "}
-            <a
-              href="https://github.com/The-Broken-Keyboard"
-              style={{ color: "inherit", "text-decoration": "none" }}
-            >
-              Shreyansh
-            </a>{" "}
-            and{" "}
-            <a
-              href="https://github.com/bhavberi"
-              style={{ color: "inherit", "text-decoration": "none" }}
-            >
-              Bhav
-            </a>{" "}
-            (WebAdmins Team)
-            <br />
-            Page last updated in October, 2024
-          </Typography>
-        </Box>
+        <Footer theme={theme} />
       </div>
     </ThemeProvider>
   );
 }
-
-export default App;
