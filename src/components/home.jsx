@@ -68,14 +68,24 @@ const darkTheme = createTheme({
 export default function HomeComponent() {
   const [darkMode, setDarkMode] = useState(false); // State to toggle theme
   const theme = darkMode ? darkTheme : lightTheme;
-
+  
+  React.useEffect(() => {
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) {
+      setDarkMode(savedTheme === 'dark');
+    }
+  }, []);
+  
   const toggleTheme = () => {
+    const newTheme = !darkMode ? 'dark' : 'light';
     setDarkMode(!darkMode);
+    localStorage.setItem('theme', newTheme);
   };
+  
 
   const isMobile = useMediaQuery("(max-width:600px)");
   const isTablet = useMediaQuery("(min-width:601px) and (max-width:900px)");
-  const isBigTablet = useMediaQuery("(min-width:901px) and (max-width:1280px)");
+  const isBigTablet = useMediaQuery("(min-width:901px) and (max-width:1400px)");
   const is1024 = useMediaQuery("(width:1024px)");
   const is1280 = useMediaQuery("(width:1280px)");
 
@@ -114,9 +124,15 @@ export default function HomeComponent() {
             <Switch
               checked={darkMode}
               onChange={toggleTheme}
-              icon={<Brightness7Icon fontSize="small" color="switch" />}
+              icon={<Brightness7Icon fontSize="small" sx={{ color: darkMode ? "#B98C8C" : "#E1C6E7" }} />}
               checkedIcon={<Brightness4Icon fontSize="small" />}
-              sx={{ marginLeft: "auto", transform: "scale(1.5)" }}
+              sx={{ marginLeft: "auto",
+                "& .MuiSwitch-track": {
+                  backgroundColor: darkMode ? "#FFD700" : "#FFD700", // Yellowish color for the track
+                },
+                "& .Mui-checked + .MuiSwitch-track": {
+                  backgroundColor: "#FFD700", // Yellowish color for the track when checked
+                }, transform: "scale(1.5)" }}
             />
           </Toolbar>
           {/* <Typography sx={{ marginLeft: 'auto', color: theme.palette.text.primary }}>
@@ -128,147 +144,104 @@ export default function HomeComponent() {
           sx={{
             marginBottom: "30px",
             marginTop: isMobile ? "5vh" : "2vh",
-            // height: "auto",
-            marginLeft: is1024
-              ? "-5vw"
-              : is1280
-              ? "-5vw"
-              : isMobile
-              ? "auto"
-              : isTablet
-              ? "-6vw"
-              : isBigTablet
-              ? "-6vw"
-              : "auto",
-            paddingLeft: isMobile
-              ? "auto"
-              : isTablet
-              ? "auto"
-              : isBigTablet
-              ? "auto"
-              : "5vw",
-            paddingRight: isMobile
-              ? "auto"
-              : isTablet
-              ? "auto"
-              : isBigTablet
-              ? "auto"
-              : "5vw",
-            marginRight: isMobile
-              ? "auto"
-              : isTablet
-              ? "5vw"
-              : isBigTablet
-              ? "5vw"
-              : "5vw",
+            marginLeft: "auto",
+            marginRight: "auto",
+            paddingLeft: isMobile ? "auto" : "5vw",
+            paddingRight: isMobile ? "auto" : "5vw",
           }}
         >
-          <Typography
-            variant="h5"
-            gutterBottom
+          <Container
+            maxWidth={isMobile ? "md" : isTablet ? "md" : "lg"} // Adjust maxWidth to 'md' or 'sm' for a narrower container
             sx={{
-              textAlign: "center",
-              marginBottom: "20px",
-              fontFamily: "Georgia",
-              marginRight: isMobile
-                ? "0vw"
-                : isTablet
-                ? "-15vw"
-                : isBigTablet
-                ? "-11vw"
-                : "0vw",
-              marginLeft: isMobile
-                ? "auto"
-                : isTablet
-                ? "auto"
-                : isBigTablet
-                ? "auto"
-                : "5vw",
-              color: theme.palette.text.primary,
+              backgroundColor: "rgba(255, 255, 255, 0.01)",
+              borderRadius: "10px",
+              padding: "30px",
+              height: "auto",
+              marginLeft: "auto",
+              marginRight: "auto",
             }}
           >
-            Popular Portals
-          </Typography>
+            <Typography
+              variant="h5"
+              gutterBottom
+              sx={{
+                textAlign: "center",
+                marginBottom: "20px",
+                fontFamily: "Georgia",
+                color: theme.palette.text.primary,
+              }}
+            >
+              Popular Portals
+            </Typography>
 
-          <Grid
-            container
-            spacing={is1280 ? 25 : isTablet ? 17 : isBigTablet ? 20 : 2}
-          >
-            {popularPortals.map((portal, index) => (
-              <Grid item xs={12} sm={2} key={index} sx={{ marginTop: "20px" }}>
-                <Card
-                  sx={{
-                    backgroundColor: theme.palette.background.paper,
-                    boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
-                    borderRadius: "10px",
-                    border: `1px solid ${theme.palette.background.default}`,
-                    textAlign: "center",
-                    padding: isTablet
-                      ? "0.1vw"
-                      : isBigTablet
-                      ? "0.1vw"
-                      : "10px",
-                    paddingBottom: "0vh",
-                    width: isMobile
-                      ? "60vw"
-                      : isTablet
-                      ? "18vw"
-                      : isBigTablet
-                      ? "18vw"
-                      : "10vw",
-                    height: "100%",
-                    marginLeft: isMobile
-                      ? "13vw"
-                      : isTablet
-                      ? "7vw"
-                      : isBigTablet
-                      ? "7vw"
-                      : "10vw",
-                    marginRight: isMobile
-                      ? "13vw"
-                      : isTablet
-                      ? "5vw"
-                      : isBigTablet
-                      ? "5vw"
-                      : "10vw",
-                    alignItems: "center",
-                    justifyContent: "center",
-                  }}
+            <Grid container spacing={5} justifyContent="center">
+              {" "}
+              {/* Centering the grid items */}
+              {popularPortals.map((portal, index) => (
+                <Grid
+                  item
+                  xs={12}
+                  sm={6}
+                  md={4}
+                  lg={3.5}
+                  key={index}
+                  sx={{ display: "flex", justifyContent: "center" }} // Center each grid item
                 >
-                  {/* <CardContent> */}
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    href={portal.url}
-                    target="_blank"
-                    startIcon={portal.icon}
+                  <Card
                     sx={{
+                      width: isMobile
+                        ? "90vw"
+                        : isTablet
+                        ? "40vw"
+                        : isBigTablet
+                        ? "40vw"
+                        : "15vw", // Restrict card width
+                      backgroundColor: theme.palette.background.paper,
+                      boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
+                      borderRadius: "10px",
+                      border: `1px solid ${theme.palette.background.default}`,
+                      textAlign: "center",
                       padding: "10px",
-                      color: "white",
-                      backgroundColor: theme.palette.primary.main,
-                      "&:hover": {
-                        backgroundColor: theme.palette.primary.light,
-                      },
-                    }}
-                    fullWidth
-                  >
-                    {portal.name}
-                  </Button>
-                  <Typography
-                    variant="body1"
-                    sx={{
-                      color: theme.palette.text.secondary,
-                      fontFamily: "Times New Roman",
-                      marginTop: "10px",
+                      paddingBottom: "20px",
+                      height: "100%",
+                      margin: "auto", // Center the card
                     }}
                   >
-                    {portal.description}
-                  </Typography>
-                  {/* </CardContent> */}
-                </Card>
-              </Grid>
-            ))}
-          </Grid>
+                    <CardContent>
+                      <Button
+                        variant="contained"
+                        color="primary"
+                        href={portal.url}
+                        target="_blank"
+                        startIcon={portal.icon}
+                        sx={{
+                          padding: "10px",
+                          color: "white",
+                          backgroundColor: theme.palette.primary.main,
+                          "&:hover": {
+                            backgroundColor: theme.palette.primary.light,
+                          },
+                        }}
+                        fullWidth
+                      >
+                        {portal.name}
+                      </Button>
+                      <Typography
+                        variant="body1"
+                        sx={{
+                          color: theme.palette.text.secondary,
+                          fontFamily: "Times New Roman",
+                          marginTop: "10px",
+                        }}
+                      >
+                        {portal.description}
+                      </Typography>
+                    </CardContent>
+                  </Card>
+                </Grid>
+              ))}
+            </Grid>
+          </Container>
         </Box>
 
         <Divider
@@ -293,7 +266,7 @@ export default function HomeComponent() {
             paddingRight: "auto",
           }}
         >
-          <Grid container spacing={3} sx={{ borderSpacing: "20px" }}>
+          <Grid container spacing={3} justifyContent="center" sx={{ borderSpacing: "20px" }}>
             {linkCategories.map((category, index) => (
               <Grid
                 item
@@ -373,111 +346,110 @@ export default function HomeComponent() {
           }}
         />
 
-        <Box sx={{ marginBottom: "30px", height: "auto" }}>
-          <Typography
-            variant="h5"
-            gutterBottom
+        <Box
+          sx={{
+            marginBottom: "30px",
+            marginTop: isMobile ? "5vh" : "2vh",
+            marginLeft: "auto",
+            marginRight: "auto",
+            paddingLeft: isMobile ? "auto" : "5vw",
+            paddingRight: isMobile ? "auto" : "5vw",
+          }}
+        >
+          <Container
+            maxWidth={isMobile ? "md" : isTablet ? "md" : "lg"} // Adjust container size based on screen
             sx={{
-              textAlign: "center",
-              marginBottom: "20px",
-              fontFamily: "Tahoma",
-              color: theme.palette.text.primary,
+              backgroundColor: "rgba(255, 255, 255, 0.01)",
+              borderRadius: "10px",
+              padding: "30px",
+              height: "auto",
+              marginLeft: "auto",
+              marginRight: "auto",
             }}
           >
-            Miscellaneous
-          </Typography>
-          <Grid
-            container
-            spacing={is1280 ? 40 : isTablet ? 25 : isBigTablet ? 30 : 2}
-            // sx={{
-            //   marginLeft: is1280
-            //     ? "-1vw"
-            //     : is1024
-            //     ? "0vw"
-            //     : isTablet
-            //     ? "-2vw"
-            //     : isBigTablet
-            //     ? "-3vw"
-            //     : isMobile
-            //     ? "8.5vw"
-            //     : "33vw",
-            // }}
-            sx={{
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          >
-            {Miscellaneous.map((portal, index) => (
-              <Grid item xs={12} sm={2} key={index}>
-                <Card
-                  sx={{
-                    backgroundColor: theme.palette.background.paper,
-                    boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
-                    borderRadius: "10px",
-                    border: `1px solid ${theme.palette.background.default}`,
-                    textAlign: "center",
-                    padding: isTablet
-                      ? "1.5vw"
-                      : isBigTablet
-                      ? "1.5vw"
-                      : "20px", // Adjust for tablet
-                    marginLeft: isTablet ? "1vw" : isBigTablet ? "1vw" : "auto", // Adjust for tablet
-                    marginRight: isTablet
-                      ? "1vw"
-                      : isBigTablet
-                      ? "1vw"
-                      : "auto", // Adjust for tablet
-                    // height: "100%",
-                    width: isMobile
-                      ? "60vw"
-                      : isTablet
-                      ? "20vw"
-                      : isBigTablet
-                      ? "20vw"
-                      : "13vw",
-                  }}
+            <Typography
+              variant="h5"
+              gutterBottom
+              sx={{
+                textAlign: "center",
+                marginBottom: "20px",
+                fontFamily: "Tahoma",
+                color: theme.palette.text.primary,
+              }}
+            >
+              Miscellaneous
+            </Typography>
+
+            <Grid container spacing={5} justifyContent="center">
+              {Miscellaneous.map((portal, index) => (
+                <Grid
+                  item
+                  xs={12}
+                  sm={6}
+                  md={4}
+                  lg={3.5}
+                  key={index}
+                  sx={{ display: "flex", justifyContent: "center" }} // Center each card
                 >
-                  <CardContent>
-                    <Button
-                      variant="contained"
-                      color="primary"
-                      href={portal.url}
-                      target="_blank"
-                      startIcon={portal.icon}
-                      fullWidth
-                      sx={{
-                        display: "flex",
-                        padding: isTablet
-                          ? "1vw"
-                          : isBigTablet
-                          ? "1vw"
-                          : "10px",
-                        color: "white",
-                        backgroundColor: theme.palette.primary.secondary,
-                        "&:hover": {
-                          backgroundColor: theme.palette.primary.lighter,
-                        },
-                      }}
-                    >
-                      {portal.name}
-                      {portal.vpnIcon}
-                    </Button>
-                    <Typography
-                      variant="body2"
-                      sx={{
-                        color: theme.palette.text.secondary,
-                        fontFamily: "Tahoma",
-                        marginTop: "10px",
-                      }}
-                    >
-                      {portal.description}
-                    </Typography>
-                  </CardContent>
-                </Card>
-              </Grid>
-            ))}
-          </Grid>
+                  <Card
+                    sx={{
+                      width: isMobile
+                        ? "90vw"
+                        : isTablet
+                        ? "40vw"
+                        : isBigTablet
+                        ? "40vw"
+                        : "15vw", // Responsive width
+                      backgroundColor: theme.palette.background.paper,
+                      boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
+                      borderRadius: "10px",
+                      border: `1px solid ${theme.palette.background.default}`,
+                      textAlign: "center",
+                      padding: "10px",
+                      paddingBottom: "20px",
+                      height: "100%",
+                      margin: "auto", // Center the card
+                    }}
+                  >
+                    <CardContent>
+                      <Button
+                        variant="contained"
+                        color="primary"
+                        href={portal.url}
+                        target="_blank"
+                        startIcon={portal.icon}
+                        sx={{
+                          padding: "10px",
+                          color: "white",
+                          backgroundColor: theme.palette.primary.main,
+                          "&:hover": {
+                            backgroundColor: theme.palette.primary.light,
+                          },
+                        }}
+                        fullWidth
+                      >
+                        {portal.name}
+                        {portal.vpnIcon && portal.vpnIcon}{" "}
+                        {/* Conditionally render VPN icon */}
+                      </Button>
+                      <Typography
+                        variant="body2"
+                        sx={{
+                          color: theme.palette.text.secondary,
+                          fontFamily: "Tahoma",
+                          marginTop: "10px",
+                        }}
+                      >
+                        {portal.description}
+                      </Typography>
+                    </CardContent>
+                  </Card>
+                </Grid>
+              ))}
+            </Grid>
+          </Container>
         </Box>
+
         <Footer theme={theme} />
       </div>
     </ThemeProvider>
