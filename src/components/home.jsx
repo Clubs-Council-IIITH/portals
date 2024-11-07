@@ -68,20 +68,17 @@ const darkTheme = createTheme({
 export default function HomeComponent() {
   const [darkMode, setDarkMode] = useState(false); // State to toggle theme
   const theme = darkMode ? darkTheme : lightTheme;
-  
+
   React.useEffect(() => {
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme) {
-      setDarkMode(savedTheme === 'dark');
-    }
+    const savedTheme = localStorage.getItem("theme");
+    if (savedTheme) setDarkMode(savedTheme === "dark");
   }, []);
-  
+
   const toggleTheme = () => {
-    const newTheme = !darkMode ? 'dark' : 'light';
+    const newTheme = !darkMode ? "dark" : "light";
     setDarkMode(!darkMode);
-    localStorage.setItem('theme', newTheme);
+    localStorage.setItem("theme", newTheme);
   };
-  
 
   const isMobile = useMediaQuery("(max-width:600px)");
   const isTablet = useMediaQuery("(min-width:601px) and (max-width:900px)");
@@ -124,15 +121,23 @@ export default function HomeComponent() {
             <Switch
               checked={darkMode}
               onChange={toggleTheme}
-              icon={<Brightness7Icon fontSize="small" sx={{ color: darkMode ? "#B98C8C" : "#E1C6E7" }} />}
+              icon={
+                <Brightness7Icon
+                  fontSize="small"
+                  sx={{ color: darkMode ? "#B98C8C" : "#E1C6E7" }}
+                />
+              }
               checkedIcon={<Brightness4Icon fontSize="small" />}
-              sx={{ marginLeft: "auto",
+              sx={{
+                marginLeft: "auto",
                 "& .MuiSwitch-track": {
                   backgroundColor: darkMode ? "#FFD700" : "#FFD700", // Yellowish color for the track
                 },
                 "& .Mui-checked + .MuiSwitch-track": {
                   backgroundColor: "#FFD700", // Yellowish color for the track when checked
-                }, transform: "scale(1.5)" }}
+                },
+                transform: "scale(1.5)",
+              }}
             />
           </Toolbar>
           {/* <Typography sx={{ marginLeft: 'auto', color: theme.palette.text.primary }}>
@@ -266,14 +271,23 @@ export default function HomeComponent() {
             paddingRight: "auto",
           }}
         >
-          <Grid container spacing={3} justifyContent="center" sx={{ borderSpacing: "20px" }}>
+          <Grid
+            container
+            spacing={3}
+            justifyContent="center"
+            sx={{ borderSpacing: "20px" }}
+          >
             {linkCategories.map((category, index) => (
               <Grid
                 item
                 xs={12}
-                sm={4}
+                sm={6}
+                md={4}
                 key={index}
-                sx={{ padding: "0 10px", marginTop: "20px" }}
+                sx={{
+                  padding: "0 10px",
+                  marginTop: "20px",
+                }}
               >
                 <Card
                   sx={{
@@ -387,7 +401,7 @@ export default function HomeComponent() {
                   xs={12}
                   sm={6}
                   md={4}
-                  lg={3.5}
+                  lg={3}
                   key={index}
                   sx={{ display: "flex", justifyContent: "center" }} // Center each card
                 >
