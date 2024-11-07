@@ -124,7 +124,7 @@ export default function HomeComponent() {
               icon={
                 <Brightness7Icon
                   fontSize="small"
-                  sx={{ color: darkMode ? "#B98C8C" : "#E1C6E7" }}
+                  sx={{ color: darkMode ? "#B98C8C" : "#7b6c7e" }}
                 />
               }
               checkedIcon={<Brightness4Icon fontSize="small" />}
