@@ -7,7 +7,7 @@ import PeopleIcon from "@mui/icons-material/People";
 import HomeIcon from "@mui/icons-material/Home";
 import SelfImprovementIcon from "@mui/icons-material/SelfImprovement";
 import CelebrationIcon from "@mui/icons-material/Celebration";
-import StorageIcon from '@mui/icons-material/Storage';
+import StorageIcon from "@mui/icons-material/Storage";
 import VpnLockIcon from "@mui/icons-material/VpnLock";
 
 const linkCategories = [
@@ -66,7 +66,7 @@ const linkCategories = [
         url: "https://hpc.iiit.ac.in/wiki/index.php/Ada_User_Guide",
         icon: <StorageIcon />,
         requiresVPN: true,
-      }
+      },
     ],
   },
   {
@@ -134,7 +134,7 @@ const Miscellaneous = [
     icon: <VpnLockIcon />,
     requiresVPN: false,
     description: "VPN",
-  }
+  },
 ];
 
 const popularPortals = [

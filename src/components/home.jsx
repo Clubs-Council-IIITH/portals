@@ -77,7 +77,7 @@ export default function HomeComponent() {
     else {
       // Get user system preference
       const userPrefersDark = window.matchMedia(
-        "(prefers-color-scheme: dark)"
+        "(prefers-color-scheme: dark)",
       ).matches;
       setDarkMode(userPrefersDark);
     }
@@ -220,10 +220,10 @@ export default function HomeComponent() {
                           width: isMobile
                             ? "90vw"
                             : isTablet
-                            ? "40vw"
-                            : isBigTablet
-                            ? "40vw"
-                            : "15vw", // Restrict card width
+                              ? "40vw"
+                              : isBigTablet
+                                ? "40vw"
+                                : "15vw", // Restrict card width
                           backgroundColor: theme.palette.background.paper,
                           boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
                           borderRadius: "10px",
@@ -433,10 +433,10 @@ export default function HomeComponent() {
                           width: isMobile
                             ? "90vw"
                             : isTablet
-                            ? "40vw"
-                            : isBigTablet
-                            ? "40vw"
-                            : "15vw", // Responsive width
+                              ? "40vw"
+                              : isBigTablet
+                                ? "40vw"
+                                : "15vw", // Responsive width
                           backgroundColor: theme.palette.background.paper,
                           boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
                           borderRadius: "10px",

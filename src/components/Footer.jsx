@@ -1,11 +1,7 @@
 "use client";
 
 import React from "react";
-import {
-  Typography,
-  Box,
-} from "@mui/material";
-
+import { Typography, Box } from "@mui/material";
 
 export default function HomeComponent({ theme }) {
   return (
@@ -16,7 +12,7 @@ export default function HomeComponent({ theme }) {
         padding: "10px 0",
         textAlign: "center",
         marginTop: "20px",
-        marginBottom: "5px"
+        marginBottom: "5px",
       }}
     >
       <Typography
