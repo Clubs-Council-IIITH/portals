@@ -1,99 +1,31 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import {
   Container,
   Grid,
   Card,
   CardContent,
   Typography,
-  Button,
   Box,
   AppBar,
   Toolbar,
   Divider,
   Switch,
   CircularProgress,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogContentText,
-  DialogTitle,
 } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useMediaQuery } from "@mui/material";
 import Brightness4Icon from "@mui/icons-material/Brightness4";
 import Brightness7Icon from "@mui/icons-material/Brightness7";
-import axios from "axios";
 
-import { linkCategories, popularPortals, Miscellaneous } from "@/app/constants";
+import {
+  linkCategories,
+  popularPortals,
+  Miscellaneous,
+} from "@/constants/constants";
 import Footer from "@/components/Footer";
-
-const VPNWarningLink = ({ link, ...buttonProps }) => {
-  const [openWarning, setOpenWarning] = useState(false);
-  const [userIP, setUserIP] = useState(null);
-
-  useEffect(() => {
-    const checkUserIP = async () => {
-      try {
-        // Use a public IP detection service
-        const response = await axios.get("https://api.ipify.org?format=json");
-        setUserIP(response.data.ip);
-      } catch (error) {
-        console.error("Error fetching IP:", error);
-      }
-    };
-
-    checkUserIP();
-  }, []);
-
-  const handleLinkClick = (e) => {
-    // Check if IP is not in the internal network range
-    if (link.requiresVPN && userIP && !userIP.startsWith("10.")) {
-      e.preventDefault();
-      setOpenWarning(true);
-    }
-  };
-
-  const handleConfirmRedirect = () => {
-    setOpenWarning(false);
-    window.location.href = link.url;
-  };
-
-  return (
-    <>
-      <Button {...buttonProps} href={link.url} onClick={handleLinkClick}>
-        {link.name}
-      </Button>
-
-      <Dialog
-        open={openWarning}
-        onClose={() => setOpenWarning(false)}
-        aria-labelledby="vpn-warning-dialog"
-        aria-describedby="vpn-warning-description"
-      >
-        <DialogTitle id="vpn-warning-dialog">
-          Internal Network Access
-        </DialogTitle>
-        <DialogContent>
-          <DialogContentText id="vpn-warning-description">
-            This link is only accessible through the internal network. Your
-            current IP ({userIP}) is not within the internal network range.
-            Please connect to the VPN before proceeding.
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={() => setOpenWarning(false)} color="secondary">
-            Cancel
-          </Button>
-          <Button onClick={handleConfirmRedirect} color="primary" autoFocus>
-            Proceed
-          </Button>
-        </DialogActions>
-      </Dialog>
-    </>
-  );
-};
+import VPNWarningLink from "@/components/VPNWarningLink";
 
 // Define themes first
 const lightTheme = createTheme({
@@ -104,6 +36,9 @@ const lightTheme = createTheme({
       secondary: "#2F3645",
       light: "#808D7C",
       lighter: "#939185",
+    },
+    secondary: {
+      main: "#4b4a5f",
     },
     background: {
       default: "#F8EDED",
@@ -123,6 +58,9 @@ const darkTheme = createTheme({
     mode: "dark",
     primary: {
       main: "#bb86fc",
+    },
+    secondary: {
+      main: "#03dac6",
     },
     background: {
       default: "#121212",
@@ -149,7 +87,7 @@ export default function HomeComponent() {
     else {
       // Get user system preference
       const userPrefersDark = window.matchMedia(
-        "(prefers-color-scheme: dark)",
+        "(prefers-color-scheme: dark)"
       ).matches;
       setDarkMode(userPrefersDark);
     }
@@ -289,10 +227,10 @@ export default function HomeComponent() {
                           width: isMobile
                             ? "90vw"
                             : isTablet
-                              ? "40vw"
-                              : isBigTablet
-                                ? "40vw"
-                                : "15vw",
+                            ? "40vw"
+                            : isBigTablet
+                            ? "40vw"
+                            : "15vw",
                           backgroundColor: theme.palette.background.paper,
                           boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
                           borderRadius: "10px",
@@ -492,10 +430,10 @@ export default function HomeComponent() {
                           width: isMobile
                             ? "90vw"
                             : isTablet
-                              ? "40vw"
-                              : isBigTablet
-                                ? "40vw"
-                                : "15vw", // Responsive width
+                            ? "40vw"
+                            : isBigTablet
+                            ? "40vw"
+                            : "15vw", // Responsive width
                           backgroundColor: theme.palette.background.paper,
                           boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
                           borderRadius: "10px",

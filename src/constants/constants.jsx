@@ -73,7 +73,7 @@ const linkCategories = [
     title: "Campus Life",
     links: [
       {
-        name: "Club Events",
+        name: "Events",
         url: "https://clubs.iiit.ac.in/events/",
         icon: <CelebrationIcon />,
         requiresVPN: false,

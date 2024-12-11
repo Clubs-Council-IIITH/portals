@@ -41,7 +41,7 @@ export default function HomeComponent({ theme }) {
         </a>{" "}
         (WebAdmins Team)
         <br />
-        Page last updated in October, 2024
+        Page last updated in December, 2024
       </Typography>
     </Box>
   );
