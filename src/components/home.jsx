@@ -14,14 +14,97 @@ import {
   Divider,
   Switch,
   CircularProgress,
+  Dialog, 
+  DialogActions, 
+  DialogContent, 
+  DialogContentText, 
+  DialogTitle 
 } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useMediaQuery } from "@mui/material";
 import Brightness4Icon from "@mui/icons-material/Brightness4";
 import Brightness7Icon from "@mui/icons-material/Brightness7";
+import axios from 'axios';
 
 import { linkCategories, popularPortals, Miscellaneous } from "@/app/constants";
 import Footer from "@/components/Footer";
+
+const VPNWarningLink = ({ link, ...buttonProps }) => {
+  const [openWarning, setOpenWarning] = useState(false);
+  const [userIP, setUserIP] = useState(null);
+
+  useEffect(() => {
+    const checkUserIP = async () => {
+      try {
+        // Use a public IP detection service
+        const response = await axios.get('https://api.ipify.org?format=json');
+        setUserIP(response.data.ip);
+      } catch (error) {
+        console.error('Error fetching IP:', error);
+      }
+    };
+
+    checkUserIP();
+  }, []);
+
+  const handleLinkClick = (e) => {
+    // Check if IP is not in the internal network range
+    if (link.requiresVPN && userIP && !userIP.startsWith('10.')) {
+      e.preventDefault();
+      setOpenWarning(true);
+    }
+  };
+
+  const handleConfirmRedirect = () => {
+    setOpenWarning(false);
+    window.location.href = link.url;
+  };
+
+  return (
+    <>
+      <Button
+        {...buttonProps}
+        href={link.url}
+        onClick={handleLinkClick}
+      >
+        {link.name}
+      </Button>
+
+      <Dialog
+        open={openWarning}
+        onClose={() => setOpenWarning(false)}
+        aria-labelledby="vpn-warning-dialog"
+        aria-describedby="vpn-warning-description"
+      >
+        <DialogTitle id="vpn-warning-dialog">
+          Internal Network Access
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText id="vpn-warning-description">
+            This link is only accessible through the internal network. 
+            Your current IP ({userIP}) is not within the internal network range.
+            Please connect to the VPN before proceeding.
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button 
+            onClick={() => setOpenWarning(false)} 
+            color="secondary"
+          >
+            Cancel
+          </Button>
+          <Button 
+            onClick={handleConfirmRedirect} 
+            color="primary" 
+            autoFocus
+          >
+            Proceed
+          </Button>
+        </DialogActions>
+      </Dialog>
+    </>
+  );
+};
 
 // Define themes first
 const lightTheme = createTheme({
@@ -179,7 +262,7 @@ export default function HomeComponent() {
               }}
             >
               <Container
-                maxWidth={isMobile ? "md" : isTablet ? "md" : "lg"} // Adjust maxWidth to 'md' or 'sm' for a narrower container
+                maxWidth={isMobile ? "md" : isTablet ? "md" : "lg"}
                 sx={{
                   backgroundColor: "rgba(255, 255, 255, 0.01)",
                   borderRadius: "10px",
@@ -201,10 +284,7 @@ export default function HomeComponent() {
                 >
                   Popular Portals
                 </Typography>
-
                 <Grid container spacing={5} justifyContent="center">
-                  {" "}
-                  {/* Centering the grid items */}
                   {popularPortals.map((portal, index) => (
                     <Grid
                       item
@@ -213,17 +293,17 @@ export default function HomeComponent() {
                       md={4}
                       lg={3.5}
                       key={index}
-                      sx={{ display: "flex", justifyContent: "center" }} // Center each grid item
+                      sx={{ display: "flex", justifyContent: "center" }}
                     >
                       <Card
                         sx={{
                           width: isMobile
                             ? "90vw"
                             : isTablet
-                              ? "40vw"
-                              : isBigTablet
-                                ? "40vw"
-                                : "15vw", // Restrict card width
+                            ? "40vw"
+                            : isBigTablet
+                            ? "40vw"
+                            : "15vw",
                           backgroundColor: theme.palette.background.paper,
                           boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
                           borderRadius: "10px",
@@ -232,15 +312,18 @@ export default function HomeComponent() {
                           padding: "10px",
                           paddingBottom: "20px",
                           height: "100%",
-                          margin: "auto", // Center the card
+                          margin: "auto",
                         }}
                       >
                         <CardContent>
-                          <Button
+                          <VPNWarningLink
+                            link={{
+                              name: portal.name,
+                              url: portal.url,
+                              requiresVPN: portal.requiresVPN // Assuming you add this property to your portal objects
+                            }}
                             variant="contained"
                             color="primary"
-                            href={portal.url}
-                            target="_blank"
                             startIcon={portal.icon}
                             sx={{
                               padding: "10px",
@@ -251,9 +334,7 @@ export default function HomeComponent() {
                               },
                             }}
                             fullWidth
-                          >
-                            {portal.name}
-                          </Button>
+                          />
                           <Typography
                             variant="body1"
                             sx={{
@@ -337,22 +418,14 @@ export default function HomeComponent() {
                         >
                           {category.title}
                         </Typography>
+                        
                         {category.links.map((link, i) => (
                           <Box key={i} sx={{ margin: "10px 0" }}>
-                            <Button
+                            <VPNWarningLink 
+                              link={link}
                               variant="contained"
                               color="primary"
-                              href={link.url}
-                              target="_blank"
                               startIcon={link.icon}
-                              // endIcon={
-                              //   link.requiresVPN ? (
-                              //     <VpnLockIcon
-                              //       fontSize={"0.01rem"}
-                              //       sx={{ marginRight: "10px" }}
-                              //     />
-                              //   ) : null
-                              // }
                               fullWidth
                               sx={{
                                 padding: "10px",
@@ -362,9 +435,7 @@ export default function HomeComponent() {
                                   backgroundColor: "#1A6B8D",
                                 },
                               }}
-                            >
-                              {link.name}
-                            </Button>
+                            />
                           </Box>
                         ))}
                       </CardContent>
@@ -416,7 +487,6 @@ export default function HomeComponent() {
                 >
                   Miscellaneous
                 </Typography>
-
                 <Grid container spacing={5} justifyContent="center">
                   {Miscellaneous.map((portal, index) => (
                     <Grid
@@ -433,10 +503,10 @@ export default function HomeComponent() {
                           width: isMobile
                             ? "90vw"
                             : isTablet
-                              ? "40vw"
-                              : isBigTablet
-                                ? "40vw"
-                                : "15vw", // Responsive width
+                            ? "40vw"
+                            : isBigTablet
+                            ? "40vw"
+                            : "15vw", // Responsive width
                           backgroundColor: theme.palette.background.paper,
                           boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
                           borderRadius: "10px",
@@ -449,12 +519,12 @@ export default function HomeComponent() {
                         }}
                       >
                         <CardContent>
-                          <Button
+                          <VPNWarningLink
+                            link={portal} // Pass the portal object to VPNWarningLink
                             variant="contained"
                             color="primary"
-                            href={portal.url}
-                            target="_blank"
                             startIcon={portal.icon}
+                            fullWidth
                             sx={{
                               padding: "10px",
                               color: "white",
@@ -463,12 +533,7 @@ export default function HomeComponent() {
                                 backgroundColor: theme.palette.primary.light,
                               },
                             }}
-                            fullWidth
-                          >
-                            {portal.name}
-                            {portal.vpnIcon && portal.vpnIcon}{" "}
-                            {/* Conditionally render VPN icon */}
-                          </Button>
+                          />
                           <Typography
                             variant="body2"
                             sx={{
