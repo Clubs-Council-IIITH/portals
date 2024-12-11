@@ -14,17 +14,17 @@ import {
   Divider,
   Switch,
   CircularProgress,
-  Dialog, 
-  DialogActions, 
-  DialogContent, 
-  DialogContentText, 
-  DialogTitle 
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
 } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useMediaQuery } from "@mui/material";
 import Brightness4Icon from "@mui/icons-material/Brightness4";
 import Brightness7Icon from "@mui/icons-material/Brightness7";
-import axios from 'axios';
+import axios from "axios";
 
 import { linkCategories, popularPortals, Miscellaneous } from "@/app/constants";
 import Footer from "@/components/Footer";
@@ -37,10 +37,10 @@ const VPNWarningLink = ({ link, ...buttonProps }) => {
     const checkUserIP = async () => {
       try {
         // Use a public IP detection service
-        const response = await axios.get('https://api.ipify.org?format=json');
+        const response = await axios.get("https://api.ipify.org?format=json");
         setUserIP(response.data.ip);
       } catch (error) {
-        console.error('Error fetching IP:', error);
+        console.error("Error fetching IP:", error);
       }
     };
 
@@ -49,7 +49,7 @@ const VPNWarningLink = ({ link, ...buttonProps }) => {
 
   const handleLinkClick = (e) => {
     // Check if IP is not in the internal network range
-    if (link.requiresVPN && userIP && !userIP.startsWith('10.')) {
+    if (link.requiresVPN && userIP && !userIP.startsWith("10.")) {
       e.preventDefault();
       setOpenWarning(true);
     }
@@ -62,11 +62,7 @@ const VPNWarningLink = ({ link, ...buttonProps }) => {
 
   return (
     <>
-      <Button
-        {...buttonProps}
-        href={link.url}
-        onClick={handleLinkClick}
-      >
+      <Button {...buttonProps} href={link.url} onClick={handleLinkClick}>
         {link.name}
       </Button>
 
@@ -81,23 +77,16 @@ const VPNWarningLink = ({ link, ...buttonProps }) => {
         </DialogTitle>
         <DialogContent>
           <DialogContentText id="vpn-warning-description">
-            This link is only accessible through the internal network. 
-            Your current IP ({userIP}) is not within the internal network range.
+            This link is only accessible through the internal network. Your
+            current IP ({userIP}) is not within the internal network range.
             Please connect to the VPN before proceeding.
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button 
-            onClick={() => setOpenWarning(false)} 
-            color="secondary"
-          >
+          <Button onClick={() => setOpenWarning(false)} color="secondary">
             Cancel
           </Button>
-          <Button 
-            onClick={handleConfirmRedirect} 
-            color="primary" 
-            autoFocus
-          >
+          <Button onClick={handleConfirmRedirect} color="primary" autoFocus>
             Proceed
           </Button>
         </DialogActions>
@@ -300,10 +289,10 @@ export default function HomeComponent() {
                           width: isMobile
                             ? "90vw"
                             : isTablet
-                            ? "40vw"
-                            : isBigTablet
-                            ? "40vw"
-                            : "15vw",
+                              ? "40vw"
+                              : isBigTablet
+                                ? "40vw"
+                                : "15vw",
                           backgroundColor: theme.palette.background.paper,
                           boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
                           borderRadius: "10px",
@@ -320,7 +309,7 @@ export default function HomeComponent() {
                             link={{
                               name: portal.name,
                               url: portal.url,
-                              requiresVPN: portal.requiresVPN // Assuming you add this property to your portal objects
+                              requiresVPN: portal.requiresVPN, // Assuming you add this property to your portal objects
                             }}
                             variant="contained"
                             color="primary"
@@ -418,10 +407,10 @@ export default function HomeComponent() {
                         >
                           {category.title}
                         </Typography>
-                        
+
                         {category.links.map((link, i) => (
                           <Box key={i} sx={{ margin: "10px 0" }}>
-                            <VPNWarningLink 
+                            <VPNWarningLink
                               link={link}
                               variant="contained"
                               color="primary"
@@ -503,10 +492,10 @@ export default function HomeComponent() {
                           width: isMobile
                             ? "90vw"
                             : isTablet
-                            ? "40vw"
-                            : isBigTablet
-                            ? "40vw"
-                            : "15vw", // Responsive width
+                              ? "40vw"
+                              : isBigTablet
+                                ? "40vw"
+                                : "15vw", // Responsive width
                           backgroundColor: theme.palette.background.paper,
                           boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
                           borderRadius: "10px",
