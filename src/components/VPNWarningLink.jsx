@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import {
   Button,
+  Tooltip,
   Dialog,
   DialogActions,
   DialogContent,
@@ -34,7 +35,7 @@ const VPNWarningLink = ({ link, ...buttonProps }) => {
     if (link.requiresVPN && userIP && !userIP.startsWith("10.")) {
       e.preventDefault();
       setOpenWarning(true);
-    }
+    } else handleConfirmRedirect();
   };
 
   const handleConfirmRedirect = () => {
@@ -49,9 +50,14 @@ const VPNWarningLink = ({ link, ...buttonProps }) => {
 
   return (
     <>
-      <Button {...buttonProps} href={link.url} onClick={handleLinkClick}>
-        {link.name}
-      </Button>
+      <Tooltip
+        title={<span style={{ fontSize: "0.8rem" }}>{link.url}</span>}
+        followCursor={true}
+      >
+        <Button {...buttonProps} onClick={handleLinkClick}>
+          {link.name}
+        </Button>
+      </Tooltip>
 
       <Dialog
         open={openWarning}
