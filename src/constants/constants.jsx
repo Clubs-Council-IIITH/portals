@@ -51,15 +51,15 @@ const linkCategories = [
       },
       {
         name: "Research Centres",
-        url: "https://web2py.iiit.ac.in/research_centres",
+        url: "https://research.iiit.ac.in/centers/",
         icon: <ResearchIcon />,
-        requiresVPN: false,
+        requiresVPN: true,
       },
       {
         name: "Publications Portal",
-        url: "https://web2py.iiit.ac.in/research_centres/publications/",
+        url: "https://research.iiit.ac.in/publications/",
         icon: <LibraryBooksIcon />,
-        requiresVPN: false,
+        requiresVPN: true,
       },
       {
         name: "Ada User Guide",
