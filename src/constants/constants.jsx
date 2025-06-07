@@ -9,8 +9,8 @@ import SelfImprovementIcon from "@mui/icons-material/SelfImprovement";
 import CelebrationIcon from "@mui/icons-material/Celebration";
 import StorageIcon from "@mui/icons-material/Storage";
 import VpnLockIcon from "@mui/icons-material/VpnLock";
-import CreditScoreIcon from '@mui/icons-material/CreditScore';
-import AndroidIcon from '@mui/icons-material/Android';
+import CreditScoreIcon from "@mui/icons-material/CreditScore";
+import AndroidIcon from "@mui/icons-material/Android";
 
 const linkCategories = [
   {
