@@ -9,6 +9,8 @@ import SelfImprovementIcon from "@mui/icons-material/SelfImprovement";
 import CelebrationIcon from "@mui/icons-material/Celebration";
 import StorageIcon from "@mui/icons-material/Storage";
 import VpnLockIcon from "@mui/icons-material/VpnLock";
+import CreditScoreIcon from '@mui/icons-material/CreditScore';
+import AndroidIcon from '@mui/icons-material/Android';
 
 const linkCategories = [
   {
@@ -108,11 +110,18 @@ const linkCategories = [
 
 const Miscellaneous = [
   {
-    name: "IT Self Help",
-    url: "https://self-help.iiit.ac.in/",
-    icon: <PeopleIcon />,
-    requiresVPN: true,
-    description: "IT help website",
+    name: "IIIT Services",
+    url: "https://services.iiit.ac.in/",
+    icon: <CreditScoreIcon />,
+    requiresVPN: false,
+    description: "IIIT Office Services Payments",
+  },
+  {
+    name: "VPN",
+    url: "https://vpn.iiit.ac.in/",
+    icon: <VpnLockIcon />,
+    requiresVPN: false,
+    description: "VPN",
   },
   {
     name: "Password Reset",
@@ -122,18 +131,18 @@ const Miscellaneous = [
     description: "Password Reset",
   },
   {
+    name: "IT Self Help",
+    url: "https://self-help.iiit.ac.in/",
+    icon: <PeopleIcon />,
+    requiresVPN: true,
+    description: "IT help website",
+  },
+  {
     name: "Help Ticket",
     url: "https://help.iiit.ac.in/",
     icon: <PeopleIcon />,
     requiresVPN: false,
     description: "Help Ticket",
-  },
-  {
-    name: "VPN",
-    url: "https://vpn.iiit.ac.in/",
-    icon: <VpnLockIcon />,
-    requiresVPN: false,
-    description: "VPN",
   },
 ];
 
@@ -172,6 +181,13 @@ const popularPortals = [
     icon: <HomeIcon />,
     requiresVPN: false,
     description: "Campus Blogs and Stories",
+  },
+  {
+    name: "My IIIT App",
+    url: "https://play.google.com/store/apps/details?id=com.iiith.ims_app&hl=en_IN",
+    icon: <AndroidIcon />,
+    requiresVPN: false,
+    description: "'My IIIT' app Playstore link",
   },
 ];
 
