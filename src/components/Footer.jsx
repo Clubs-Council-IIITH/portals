@@ -23,7 +23,7 @@ export default function HomeComponent({ theme }) {
           marginRight: "10px",
         }}
       >
-        © 2024, IIIT Hyderabad. All rights reserved.
+        © 2025, IIIT Hyderabad. All rights reserved.
         <br />
         Designed by{" "}
         <a
@@ -41,7 +41,7 @@ export default function HomeComponent({ theme }) {
         </a>{" "}
         (WebAdmins Team)
         <br />
-        Page last updated in December, 2024
+        Page last updated in June, 2025
       </Typography>
     </Box>
   );
