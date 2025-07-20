@@ -22,12 +22,6 @@ const linkCategories = [
         icon: <SchoolIcon />,
         requiresVPN: true,
       },
-      // {
-      //   name: "Old Courses Portal",
-      //   url: "https://courses-old.iiit.ac.in",
-      //   icon: <MenuBookIcon />,
-      //   requiresVPN: true,
-      // },
       {
         name: "Intranet",
         url: "https://intranet.iiit.ac.in",
