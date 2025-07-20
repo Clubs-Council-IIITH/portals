@@ -329,7 +329,13 @@ export default function HomeComponent() {
                         textAlign: "center",
                         padding: "10px",
                         paddingBottom: "20px",
-                        width: isMobile ? "90vw" : isTablet ? "40vw" : isBigTablet ? "40vw" : "15vw",
+                        width: isMobile
+                          ? "90vw"
+                          : isTablet
+                            ? "40vw"
+                            : isBigTablet
+                              ? "40vw"
+                              : "15vw",
                         height: "100%",
                         marginLeft: "0.5vw",
                       }}
