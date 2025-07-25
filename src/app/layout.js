@@ -1,4 +1,5 @@
 import "./globals.css";
+import { IntranetAccessProvider } from "@/providers/IntranetAccessProvider";
 
 export const metadata = {
   title: "Portals@IIITH",
@@ -8,7 +9,9 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body suppressHydrationWarning={true}>{children}</body>
+      <body suppressHydrationWarning={true}>
+        <IntranetAccessProvider>{children}</IntranetAccessProvider>
+      </body>
     </html>
   );
 }
