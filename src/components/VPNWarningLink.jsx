@@ -16,12 +16,12 @@ const VPNWarningLink = ({ link, ...buttonProps }) => {
 
   const handleConfirmRedirect = useCallback(() => {
     setOpenWarning(false);
-    window.location.href = link.url;
+    window.open(link.url, "_blank", "noopener,noreferrer");
   }, [link.url]);
 
   const handleVPNRedirect = useCallback(() => {
     setOpenWarning(false);
-    window.location.href = "https://vpn.iiit.ac.in";
+    window.open("https://vpn.iiit.ac.in", "_blank", "noopener,noreferrer");
   }, []);
 
   const handleLinkClick = (e) => {
