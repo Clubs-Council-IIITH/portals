@@ -1,6 +1,4 @@
-"use client";
-
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import {
   Button,
   Tooltip,
@@ -10,62 +8,36 @@ import {
   DialogContentText,
   DialogTitle,
 } from "@mui/material";
-
-const checkIntranetAccess = async () => {
-  try {
-    // Try to fetch from the intranet with a timeout of 2 seconds
-    const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 2000);
-
-    await fetch("https://intranet.iiit.ac.in", {
-      method: "HEAD",
-      mode: "no-cors",
-      signal: controller.signal,
-    });
-
-    clearTimeout(timeoutId);
-    return true;
-  } catch (error) {
-    console.log("Intranet access check failed:", error.message);
-    return false;
-  }
-};
+import { useIntranetAccess } from "@/providers/IntranetAccessProvider";
 
 const VPNWarningLink = ({ link, ...buttonProps }) => {
+  const intranetAccessible = useIntranetAccess();
   const [openWarning, setOpenWarning] = useState(false);
 
-  const handleLinkClick = async (e) => {
+  const handleConfirmRedirect = useCallback(() => {
+    setOpenWarning(false);
+    window.location.href = link.url;
+  }, [link.url]);
+
+  const handleVPNRedirect = useCallback(() => {
+    setOpenWarning(false);
+    window.location.href = "https://vpn.iiit.ac.in";
+  }, []);
+
+  const handleLinkClick = (e) => {
     e.preventDefault();
-
-    if (!link.requiresVPN) {
-      handleConfirmRedirect();
-      return;
-    }
-
-    const hasIntranetAccess = await checkIntranetAccess();
-
-    if (hasIntranetAccess) {
+    if (!link.requiresVPN || intranetAccessible) {
       handleConfirmRedirect();
     } else {
       setOpenWarning(true);
     }
   };
 
-  const handleConfirmRedirect = () => {
-    setOpenWarning(false);
-    window.location.href = link.url;
-  };
-
-  const handleVPNRedirect = () => {
-    setOpenWarning(false);
-    window.location.href = "https://vpn.iiit.ac.in";
-  };
-
   return (
     <>
       <Tooltip
         title={<span style={{ fontSize: "0.8rem" }}>{link.url}</span>}
-        followCursor={true}
+        followCursor
       >
         <Button 
           {...buttonProps} 
