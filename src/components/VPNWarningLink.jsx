@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import {
   Button,
   Tooltip,
@@ -10,32 +10,45 @@ import {
   DialogContentText,
   DialogTitle,
 } from "@mui/material";
-import axios from "axios";
 
-const checkUserIP = async (setUserIP) => {
+const checkIntranetAccess = async () => {
   try {
-    // Use a public IP detection service
-    const response = await axios.get("https://api.ipify.org?format=json");
-    setUserIP(response.data.ip);
+    // Try to fetch from the intranet with a timeout of 2 seconds
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 2000);
+
+    await fetch("https://intranet.iiit.ac.in", {
+      method: "HEAD",
+      mode: "no-cors",
+      signal: controller.signal,
+    });
+
+    clearTimeout(timeoutId);
+    return true;
   } catch (error) {
-    console.error("Error fetching IP:", error);
+    console.log("Intranet access check failed:", error.message);
+    return false;
   }
 };
 
 const VPNWarningLink = ({ link, ...buttonProps }) => {
   const [openWarning, setOpenWarning] = useState(false);
-  const [userIP, setUserIP] = useState(null);
 
-  useEffect(() => {
-    checkUserIP(setUserIP);
-  }, []);
+  const handleLinkClick = async (e) => {
+    e.preventDefault();
 
-  const handleLinkClick = (e) => {
-    // Check if IP is not in the internal network range
-    if (link.requiresVPN && userIP && !userIP.startsWith("10.")) {
-      e.preventDefault();
+    if (!link.requiresVPN) {
+      handleConfirmRedirect();
+      return;
+    }
+
+    const hasIntranetAccess = await checkIntranetAccess();
+
+    if (hasIntranetAccess) {
+      handleConfirmRedirect();
+    } else {
       setOpenWarning(true);
-    } else handleConfirmRedirect();
+    }
   };
 
   const handleConfirmRedirect = () => {
@@ -54,7 +67,10 @@ const VPNWarningLink = ({ link, ...buttonProps }) => {
         title={<span style={{ fontSize: "0.8rem" }}>{link.url}</span>}
         followCursor={true}
       >
-        <Button {...buttonProps} onClick={handleLinkClick}>
+        <Button 
+          {...buttonProps} 
+          onClick={handleLinkClick}
+        >
           {link.name}
         </Button>
       </Tooltip>
@@ -66,16 +82,16 @@ const VPNWarningLink = ({ link, ...buttonProps }) => {
         aria-describedby="vpn-warning-description"
       >
         <DialogTitle id="vpn-warning-dialog">
-          Internal Network Access
+          Internal Network Access Required
         </DialogTitle>
         <DialogContent>
           <DialogContentText id="vpn-warning-description">
-            Access to this link is restricted to the internal network. Your
-            current IP address ({userIP}) does not appear to fall within the
-            allowed internal network range.
+            Access to this link is restricted to the internal network. 
+            It appears you are not currently connected to the internal network or VPN.
             <br />
-            Please connect to the VPN before proceeding. For additional details
-            about VPN access, visit the VPN site.
+            <br />
+            Please connect to the VPN or ensure you are on the internal network before proceeding. 
+            For additional details about VPN access, visit the VPN site.
           </DialogContentText>
         </DialogContent>
         <DialogActions>
@@ -91,7 +107,7 @@ const VPNWarningLink = ({ link, ...buttonProps }) => {
             autoFocus
             variant="outlined"
           >
-            Proceed
+            Continue
           </Button>
         </DialogActions>
       </Dialog>
