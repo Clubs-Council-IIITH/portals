@@ -39,10 +39,7 @@ const VPNWarningLink = ({ link, ...buttonProps }) => {
         title={<span style={{ fontSize: "0.8rem" }}>{link.url}</span>}
         followCursor
       >
-        <Button 
-          {...buttonProps} 
-          onClick={handleLinkClick}
-        >
+        <Button {...buttonProps} onClick={handleLinkClick}>
           {link.name}
         </Button>
       </Tooltip>
@@ -58,12 +55,14 @@ const VPNWarningLink = ({ link, ...buttonProps }) => {
         </DialogTitle>
         <DialogContent>
           <DialogContentText id="vpn-warning-description">
-            Access to this link is restricted to the internal network. 
-            It appears you are not currently connected to the internal network or VPN.
+            Access to this link is restricted to the internal network. It
+            appears you are not currently connected to the internal network or
+            VPN.
             <br />
             <br />
-            Please connect to the VPN or ensure you are on the internal network before proceeding. 
-            For additional details about VPN access, visit the VPN site.
+            Please connect to the VPN or ensure you are on the internal network
+            before proceeding. For additional details about VPN access, visit
+            the VPN site.
           </DialogContentText>
         </DialogContent>
         <DialogActions>

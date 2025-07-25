@@ -41,7 +41,8 @@ export const IntranetAccessProvider = ({ children }) => {
     };
 
     document.addEventListener("visibilitychange", handleVisibility);
-    return () => document.removeEventListener("visibilitychange", handleVisibility);
+    return () =>
+      document.removeEventListener("visibilitychange", handleVisibility);
   }, []);
 
   return (
