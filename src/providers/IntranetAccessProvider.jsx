@@ -9,7 +9,7 @@ const checkIntranetAccess = async () => {
     const controller = new AbortController();
     const timeoutId = setTimeout(() => controller.abort(), 2000);
 
-    await fetch("https://intranet.iiit.ac.in", {
+    await fetch("https://mess.iiit.ac.in", {
       method: "HEAD",
       mode: "no-cors",
       signal: controller.signal,
