@@ -7,9 +7,9 @@ const IntranetAccessContext = createContext();
 const checkIntranetAccess = async () => {
   try {
     const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 2000);
+    const timeoutId = setTimeout(() => controller.abort(), 1000);
 
-    await fetch("https://mess.iiit.ac.in", {
+    await fetch("https://life.iiit.ac.in/404", {
       method: "HEAD",
       mode: "no-cors",
       signal: controller.signal,
@@ -17,8 +17,25 @@ const checkIntranetAccess = async () => {
 
     clearTimeout(timeoutId);
     return true;
-  } catch {
-    return false;
+  } catch (error) {
+    // Check for specific DNS resolution failure
+    if (error.message && error.message.includes('ERR_NAME_NOT_RESOLVED')) {
+      return false; // DNS resolution failed - not on intranet
+    }
+    
+    // Check for timeout/abort
+    if (error.name === 'AbortError') {
+      return false; // Timeout - likely DNS or connectivity issue
+    }
+    
+    // Check for other network errors that indicate DNS failure
+    if (error.name === 'TypeError' && error.message.includes('Failed to fetch')) {
+      return false; // Network error - likely DNS related
+    }
+    
+    // For any other errors in no-cors mode, assume DNS worked
+    // (could be CORS, 404, or other HTTP-level errors)
+    return true;
   }
 };
 
