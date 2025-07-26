@@ -19,20 +19,23 @@ const checkIntranetAccess = async () => {
     return true;
   } catch (error) {
     // Check for specific DNS resolution failure
-    if (error.message && error.message.includes('ERR_NAME_NOT_RESOLVED')) {
+    if (error.message && error.message.includes("ERR_NAME_NOT_RESOLVED")) {
       return false; // DNS resolution failed - not on intranet
     }
-    
+
     // Check for timeout/abort
-    if (error.name === 'AbortError') {
+    if (error.name === "AbortError") {
       return false; // Timeout - likely DNS or connectivity issue
     }
-    
+
     // Check for other network errors that indicate DNS failure
-    if (error.name === 'TypeError' && error.message.includes('Failed to fetch')) {
+    if (
+      error.name === "TypeError" &&
+      error.message.includes("Failed to fetch")
+    ) {
       return false; // Network error - likely DNS related
     }
-    
+
     // For any other errors in no-cors mode, assume DNS worked
     // (could be CORS, 404, or other HTTP-level errors)
     return true;
