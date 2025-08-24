@@ -33,20 +33,21 @@ const lightTheme = createTheme({
     mode: "light",
     primary: {
       main: "#5F6F65",
-      secondary: "#2F3645",
       light: "#808D7C",
-      lighter: "#939185",
+      // lighter: "#939185",
     },
-    secondary: {
-      main: "#4b4a5f",
-    },
+    // secondary: {
+    //   main: "#4b4a5f",
+    // },
     background: {
       default: "#F8EDED",
       paper: "#ffffff",
     },
-    switch: {
-      main: "rgb(235, 219, 43)",
+    text: {
+      primary: "#000",
+      secondary: "#555",
     },
+    switch: "#7b6c7e",
   },
   typography: {
     fontFamily: "Tahoma, Arial",
@@ -57,19 +58,21 @@ const darkTheme = createTheme({
   palette: {
     mode: "dark",
     primary: {
-      main: "#bb86fc",
+      main: "#9367c8",
+      light: "#ab82e0",
     },
-    secondary: {
-      main: "#03dac6",
-    },
+    // secondary: {
+    //   main: "#03dac6",
+    // },
     background: {
       default: "#121212",
       paper: "#1d1d1d",
     },
     text: {
-      primary: "#ffffff",
+      primary: "#fff",
       secondary: "#aaaaaa",
     },
+    switch: "#ab82e0",
   },
   typography: {
     fontFamily: "Tahoma, Arial",
@@ -87,7 +90,7 @@ export default function HomeComponent() {
     else {
       // Get user system preference
       const userPrefersDark = window.matchMedia(
-        "(prefers-color-scheme: dark)",
+        "(prefers-color-scheme: dark)"
       ).matches;
       setDarkMode(userPrefersDark);
     }
@@ -157,10 +160,15 @@ export default function HomeComponent() {
                   icon={
                     <Brightness7Icon
                       fontSize="small"
-                      sx={{ color: darkMode ? "#B98C8C" : "#7b6c7e" }}
+                      sx={{ color: theme.palette.switch }}
                     />
                   }
-                  checkedIcon={<Brightness4Icon fontSize="small" />}
+                  checkedIcon={
+                    <Brightness4Icon
+                      fontSize="small"
+                      sx={{ color: theme.palette.switch }}
+                    />
+                  }
                   sx={{
                     marginLeft: "auto",
                     "& .MuiSwitch-track": {
@@ -227,10 +235,10 @@ export default function HomeComponent() {
                           width: isMobile
                             ? "90vw"
                             : isTablet
-                              ? "40vw"
-                              : isBigTablet
-                                ? "40vw"
-                                : "15vw",
+                            ? "40vw"
+                            : isBigTablet
+                            ? "40vw"
+                            : "15vw",
                           backgroundColor: theme.palette.background.paper,
                           boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
                           borderRadius: "10px",
@@ -266,7 +274,7 @@ export default function HomeComponent() {
                             variant="body1"
                             sx={{
                               color: theme.palette.text.secondary,
-                              fontFamily: "Times New Roman",
+                              fontFamily: "Tahoma",
                               marginTop: "10px",
                             }}
                           >
@@ -290,34 +298,34 @@ export default function HomeComponent() {
             />
 
             <Container
-              maxWidth="lg"
+              maxWidth="xl"
               sx={{
                 backgroundColor: "rgba(255, 255, 255, 0.01)",
                 borderRadius: "10px",
                 padding: "30px",
                 height: "auto",
-                marginLeft: isMobile ? "1vw" : "auto",
+                marginLeft: "auto",
                 marginRight: "auto",
-                paddingLeft: "auto",
-                paddingRight: "auto",
               }}
             >
-              <Grid
-                container
-                spacing={3}
-                justifyContent="center"
-                sx={{ borderSpacing: "20px" }}
+              <Box
+                sx={{
+                  display: "flex",
+                  flexDirection: { xs: "column", md: "row" },
+                  gap: 3,
+                  alignItems: { xs: "center", md: "stretch" },
+                  justifyContent: "center",
+                }}
               >
                 {linkCategories.map((category, index) => (
-                  <Grid
-                    item
-                    xs={12}
-                    sm={6}
-                    md={4}
+                  <Box
                     key={index}
                     sx={{
-                      padding: "0 10px",
-                      marginTop: "20px",
+                      width: { xs: "90%", sm: "80%" },
+                      flex: { md: "1 1 0" },
+                      minWidth: 0,
+                      display: "flex",
+                      maxWidth: { lg: "20vw" },
                     }}
                   >
                     <Card
@@ -329,15 +337,8 @@ export default function HomeComponent() {
                         textAlign: "center",
                         padding: "10px",
                         paddingBottom: "20px",
-                        width: isMobile
-                          ? "90vw"
-                          : isTablet
-                            ? "40vw"
-                            : isBigTablet
-                              ? "40vw"
-                              : "15vw",
+                        width: "100%",
                         height: "100%",
-                        marginLeft: "0.5vw",
                       }}
                     >
                       <CardContent>
@@ -374,9 +375,9 @@ export default function HomeComponent() {
                         ))}
                       </CardContent>
                     </Card>
-                  </Grid>
+                  </Box>
                 ))}
-              </Grid>
+              </Box>
             </Container>
 
             <Divider
@@ -437,10 +438,10 @@ export default function HomeComponent() {
                           width: isMobile
                             ? "90vw"
                             : isTablet
-                              ? "40vw"
-                              : isBigTablet
-                                ? "40vw"
-                                : "15vw", // Responsive width
+                            ? "40vw"
+                            : isBigTablet
+                            ? "40vw"
+                            : "15vw", // Responsive width
                           backgroundColor: theme.palette.background.paper,
                           boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
                           borderRadius: "10px",
