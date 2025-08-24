@@ -57,7 +57,7 @@ const darkTheme = createTheme({
   palette: {
     mode: "dark",
     primary: {
-      main: "#bb86fc",
+      main: "#9367c8ff",
     },
     secondary: {
       main: "#03dac6",
@@ -265,7 +265,7 @@ export default function HomeComponent() {
                           <Typography
                             variant="body1"
                             sx={{
-                              color: theme.palette.text.secondary,
+                              color: theme.palette.text.primary,
                               fontFamily: "Times New Roman",
                               marginTop: "10px",
                             }}
@@ -290,34 +290,34 @@ export default function HomeComponent() {
             />
 
             <Container
-              maxWidth="lg"
+              maxWidth="xl"
               sx={{
                 backgroundColor: "rgba(255, 255, 255, 0.01)",
                 borderRadius: "10px",
                 padding: "30px",
                 height: "auto",
-                marginLeft: isMobile ? "1vw" : "auto",
+                marginLeft: "auto",
                 marginRight: "auto",
-                paddingLeft: "auto",
-                paddingRight: "auto",
               }}
             >
-              <Grid
-                container
-                spacing={3}
-                justifyContent="center"
-                sx={{ borderSpacing: "20px" }}
+              <Box
+                sx={{
+                  display: "flex",
+                  flexDirection: { xs: "column", md: "row" },
+                  gap: 3,
+                  alignItems: { xs: "center", md: "stretch" },
+                  justifyContent: "center",
+                }}
               >
                 {linkCategories.map((category, index) => (
-                  <Grid
-                    item
-                    xs={12}
-                    sm={6}
-                    md={4}
+                  <Box
                     key={index}
                     sx={{
-                      padding: "0 10px",
-                      marginTop: "20px",
+                      width: { xs: "90%", sm: "80%" },
+                      flex: { md: "1 1 0" },
+                      minWidth: 0,
+                      display: "flex",
+                      maxWidth: { lg: "20vw" },
                     }}
                   >
                     <Card
@@ -329,15 +329,8 @@ export default function HomeComponent() {
                         textAlign: "center",
                         padding: "10px",
                         paddingBottom: "20px",
-                        width: isMobile
-                          ? "90vw"
-                          : isTablet
-                            ? "40vw"
-                            : isBigTablet
-                              ? "40vw"
-                              : "15vw",
+                        width: "100%",
                         height: "100%",
-                        marginLeft: "0.5vw",
                       }}
                     >
                       <CardContent>
@@ -374,9 +367,9 @@ export default function HomeComponent() {
                         ))}
                       </CardContent>
                     </Card>
-                  </Grid>
+                  </Box>
                 ))}
-              </Grid>
+              </Box>
             </Container>
 
             <Divider
@@ -471,7 +464,7 @@ export default function HomeComponent() {
                           <Typography
                             variant="body2"
                             sx={{
-                              color: theme.palette.text.secondary,
+                              color: theme.palette.text.primary,
                               fontFamily: "Tahoma",
                               marginTop: "10px",
                             }}
