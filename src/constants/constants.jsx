@@ -1,5 +1,5 @@
 import SchoolIcon from "@mui/icons-material/School";
-// import MenuBookIcon from "@mui/icons-material/MenuBook";
+import MenuBookIcon from "@mui/icons-material/MenuBook";
 import WifiIcon from "@mui/icons-material/Wifi";
 import LibraryBooksIcon from "@mui/icons-material/LibraryBooks";
 import ResearchIcon from "@mui/icons-material/Science";
@@ -58,11 +58,17 @@ const linkCategories = [
         requiresVPN: true,
       },
       {
+        name: "Theses Archive",
+        url: "https://www.iiit.ac.in/publications/thesis.php",
+        icon: <MenuBookIcon />,
+        requiresVPN: false,
+      },
+      {
         name: "Ada User Guide",
         url: "https://hpc.iiit.ac.in/wiki/index.php/Ada_User_Guide",
         icon: <StorageIcon />,
         requiresVPN: false,
-      },
+      },,
     ],
   },
   {
