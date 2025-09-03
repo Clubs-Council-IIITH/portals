@@ -68,7 +68,7 @@ const linkCategories = [
         url: "https://hpc.iiit.ac.in/wiki/index.php/Ada_User_Guide",
         icon: <StorageIcon />,
         requiresVPN: false,
-      },,
+      },
     ],
   },
   {
