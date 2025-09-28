@@ -9,8 +9,8 @@ export async function GET() {
     );
     
     return Response.json({ 
-        linkCategories: removeIconField(linkCategories),
         popularPortals: removeIconField(popularPortals),
+        linkCategories: removeIconField(linkCategories),
         miscellaneous: removeIconField(Miscellaneous)
     });
 }

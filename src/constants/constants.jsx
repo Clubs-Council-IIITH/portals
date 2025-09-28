@@ -22,6 +22,7 @@ const linkCategories = [
         icon: <SchoolIcon />,
         iconName: "graduation-cap",
         requiresVPN: true,
+        description: "IIIT Courses Portal",
       },
       {
         name: "Intranet",
@@ -29,6 +30,7 @@ const linkCategories = [
         icon: <WifiIcon />,
         iconName: "wifi",
         requiresVPN: true,
+        description: "Internal documents and resources",
       },
       {
         name: "Library",
@@ -36,6 +38,7 @@ const linkCategories = [
         icon: <LibraryBooksIcon />,
         iconName: "book",
         requiresVPN: false,
+        description: "Library catalog and resources",
       },
     ],
   },
@@ -48,6 +51,7 @@ const linkCategories = [
         icon: <SchoolIcon />,
         iconName: "graduation-cap",
         requiresVPN: false,
+        description: "Seminar schedules and registration",
       },
       {
         name: "Research Centres",
@@ -55,6 +59,7 @@ const linkCategories = [
         icon: <ResearchIcon />,
         iconName: "flask",
         requiresVPN: true,
+        description: "Research centers and labs",
       },
       {
         name: "Publications Portal",
@@ -62,6 +67,7 @@ const linkCategories = [
         icon: <LibraryBooksIcon />,
         iconName: "book",
         requiresVPN: true,
+        description: "Academic publications database",
       },
       {
         name: "Theses Archive",
@@ -69,6 +75,7 @@ const linkCategories = [
         icon: <MenuBookIcon />,
         iconName: "book-open",
         requiresVPN: false,
+        description: "Student theses repository",
       },
       {
         name: "Ada User Guide",
@@ -76,6 +83,7 @@ const linkCategories = [
         icon: <StorageIcon />,
         iconName: "server",
         requiresVPN: false,
+        description: "HPC cluster documentation",
       },
     ],
   },
@@ -88,6 +96,7 @@ const linkCategories = [
         icon: <CelebrationIcon />,
         iconName: "gift",
         requiresVPN: false,
+        description: "Campus events and activities",
       },
       {
         name: "Blog",
@@ -95,6 +104,7 @@ const linkCategories = [
         icon: <HomeIcon />,
         iconName: "house",
         requiresVPN: false,
+        description: "Official IIIT blogs",
       },
       {
         name: "Mess",
@@ -102,6 +112,7 @@ const linkCategories = [
         icon: <SelfImprovementIcon />,
         iconName: "plate-wheat",
         requiresVPN: true,
+        description: "Mess menu and registration",
       },
       {
         name: "Courier",
@@ -109,6 +120,7 @@ const linkCategories = [
         icon: <SelfImprovementIcon />,
         iconName: "box-archive",
         requiresVPN: true,
+        description: "Package delivery tracking",
       },
       {
         name: "Alumni",
@@ -116,6 +128,7 @@ const linkCategories = [
         icon: <PeopleIcon />,
         iconName: "people-group",
         requiresVPN: false,
+        description: "Alumni portal",
       },
     ],
   },
