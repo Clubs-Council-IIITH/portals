@@ -13,9 +13,11 @@ export async function GET() {
         ? { ...item, links: item.links.map(({ icon, ...rest }) => rest) }
         : (({ icon, ...rest }) => rest)(item),
     );
-  
+
   // filter out My IIIT app entries both
-  let popularPortalsFiltered = popularPortals.filter(portal => !portal.name.startsWith("My IIIT App"));
+  let popularPortalsFiltered = popularPortals.filter(
+    (portal) => !portal.name.startsWith("My IIIT App"),
+  );
 
   return Response.json({
     popularPortals: removeIconField(popularPortalsFiltered),
