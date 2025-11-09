@@ -228,8 +228,9 @@ export default function HomeComponent() {
                         xs: 12,
                         sm: 6,
                         md: 4,
-                        lg: 3.5
-                      }}>
+                        lg: 3.5,
+                      }}
+                    >
                       <Card
                         sx={{
                           width: isMobile
@@ -432,8 +433,9 @@ export default function HomeComponent() {
                         xs: 12,
                         sm: 6,
                         md: 4,
-                        lg: 3
-                      }}>
+                        lg: 3,
+                      }}
+                    >
                       <Card
                         sx={{
                           width: isMobile
