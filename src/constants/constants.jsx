@@ -11,6 +11,7 @@ import StorageIcon from "@mui/icons-material/Storage";
 import VpnLockIcon from "@mui/icons-material/VpnLock";
 import CreditScoreIcon from "@mui/icons-material/CreditScore";
 import AndroidIcon from "@mui/icons-material/Android";
+import AppleIcon from '@mui/icons-material/Apple';
 
 const linkCategories = [
   {
@@ -203,14 +204,6 @@ const popularPortals = [
     description: "Mess Menu and Services",
   },
   {
-    name: "IT Self-Help",
-    url: "https://self-help.iiit.ac.in/",
-    icon: <PeopleIcon />,
-    iconName: "people-group",
-    requiresVPN: true,
-    description: "Technical Assistance",
-  },
-  {
     name: "Blog",
     url: "https://blogs.iiit.ac.in",
     icon: <HomeIcon />,
@@ -226,6 +219,14 @@ const popularPortals = [
     requiresVPN: false,
     description: "'My IIIT' app Playstore link",
   },
+  {
+    name: "My IIIT App",
+    url: "https://apps.apple.com/us/app/my-iiit/id6754322138",
+    icon: <AppleIcon />,
+    iconName: "apple",
+    requiresVPN: false,
+    description: "'My IIIT' app Appstore link",
+  }
 ];
 
 export { linkCategories, popularPortals, Miscellaneous };

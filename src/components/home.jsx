@@ -222,14 +222,14 @@ export default function HomeComponent() {
                 <Grid container spacing={5} justifyContent="center">
                   {popularPortals.map((portal, index) => (
                     <Grid
-                      item
-                      xs={12}
-                      sm={6}
-                      md={4}
-                      lg={3.5}
                       key={index}
                       sx={{ display: "flex", justifyContent: "center" }}
-                    >
+                      size={{
+                        xs: 12,
+                        sm: 6,
+                        md: 4,
+                        lg: 3.5
+                      }}>
                       <Card
                         sx={{
                           width: isMobile
@@ -425,14 +425,15 @@ export default function HomeComponent() {
                 <Grid container spacing={5} justifyContent="center">
                   {Miscellaneous.map((portal, index) => (
                     <Grid
-                      item
-                      xs={12}
-                      sm={6}
-                      md={4}
-                      lg={3}
                       key={index}
-                      sx={{ display: "flex", justifyContent: "center" }} // Center each card
-                    >
+                      // Center each card
+                      sx={{ display: "flex", justifyContent: "center" }}
+                      size={{
+                        xs: 12,
+                        sm: 6,
+                        md: 4,
+                        lg: 3
+                      }}>
                       <Card
                         sx={{
                           width: isMobile
