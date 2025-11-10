@@ -142,7 +142,7 @@ const Miscellaneous = [
     icon: <CreditScoreIcon />,
     iconName: "credit-card",
     requiresVPN: false,
-    description: "IIIT Office Services Payments",
+    description: "Official Payments site for various services",
   },
   {
     name: "VPN",
@@ -174,7 +174,7 @@ const Miscellaneous = [
     icon: <PeopleIcon />,
     iconName: "people-group",
     requiresVPN: false,
-    description: "Help Ticket",
+    description: "Help Ticket Portal",
   },
 ];
 

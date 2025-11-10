@@ -1,9 +1,9 @@
 "use client";
 
 import React from "react";
-import { Typography, Box } from "@mui/material";
+import { Typography, Box, Divider } from "@mui/material";
 
-export default function HomeComponent({ theme }) {
+export default function HomeComponent({ theme, darkMode }) {
   return (
     <Box
       sx={{
@@ -11,10 +11,21 @@ export default function HomeComponent({ theme }) {
         color: "white",
         padding: "10px 0",
         textAlign: "center",
-        marginTop: "20px",
+        marginTop: 2,
         marginBottom: "5px",
       }}
     >
+      <Divider
+        sx={{
+          width: "80%",
+          margin: "30px auto",
+          background: `linear-gradient(90deg, transparent, ${
+            darkMode ? "rgba(255,255,255,0.2)" : "rgba(0,0,0,0.2)"
+          }, transparent)`,
+          height: "1px",
+          border: "none",
+        }}
+      />
       <Typography
         variant="body2"
         sx={{
@@ -27,17 +38,17 @@ export default function HomeComponent({ theme }) {
         <br />
         Designed by{" "}
         <a
-          href="https://github.com/The-Broken-Keyboard"
-          style={{ color: "inherit", textDecoration: "none" }}
-        >
-          Shreyansh
-        </a>{" "}
-        and{" "}
-        <a
           href="https://github.com/bhavberi"
           style={{ color: "inherit", textDecoration: "none" }}
         >
           Bhav
+        </a>{" "}
+        and{" "}
+        <a
+          href="https://github.com/The-Broken-Keyboard"
+          style={{ color: "inherit", textDecoration: "none" }}
+        >
+          Shreyansh
         </a>{" "}
         (WebAdmins Team)
         <br />
