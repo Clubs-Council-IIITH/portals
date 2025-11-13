@@ -333,7 +333,7 @@ const VPNWarningLink = ({ link, ...buttonProps }) => {
                 backgroundColor: theme.palette.primary.light,
                 boxShadow: `0 4px 12px ${alpha(
                   theme.palette.primary.main,
-                  0.3
+                  0.3,
                 )}`,
               },
             }}

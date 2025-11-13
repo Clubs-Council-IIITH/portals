@@ -103,7 +103,7 @@ export default function HomeComponent() {
     if (savedTheme) setDarkMode(savedTheme === "dark");
     else {
       const userPrefersDark = window.matchMedia(
-        "(prefers-color-scheme: dark)"
+        "(prefers-color-scheme: dark)",
       ).matches;
       setDarkMode(userPrefersDark);
     }
@@ -255,7 +255,7 @@ export default function HomeComponent() {
                       : "rgba(0,0,0,0.05)",
                     borderRadius: "24px",
                     padding: "4px 8px",
-                      transition: "background-color 0.3s ease",
+                    transition: "background-color 0.3s ease",
                     px: 1.5,
                   }}
                 >
@@ -277,10 +277,11 @@ export default function HomeComponent() {
                         backgroundColor: theme.palette.primary.main,
                         opacity: 0.5,
                       },
-                      "& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track": {
-                        backgroundColor: theme.palette.text.secondary,
-                        opacity: 0.4,
-                      },
+                      "& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track":
+                        {
+                          backgroundColor: theme.palette.text.secondary,
+                          opacity: 0.4,
+                        },
                       "& .MuiSwitch-switchBase.Mui-checked": {
                         color: theme.palette.text.secondary,
                       },
