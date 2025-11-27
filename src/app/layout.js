@@ -10,12 +10,8 @@ export const metadata = {
   ],
   creator: "Bhav Beri",
   publisher: "Student WebAdmins Team, IIIT Hyderabad",
-  keywords: [
-    "IIIT Hyderabad",
-    "Portals",
-    "Intranet",
-  ],
-  generator: 'Next.js',
+  keywords: ["IIIT Hyderabad", "Portals", "Intranet"],
+  generator: "Next.js",
 };
 
 export default function RootLayout({ children }) {
