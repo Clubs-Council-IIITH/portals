@@ -51,7 +51,7 @@ const linkCategories = [
         url: "https://web2py.iiit.ac.in/seminar/default/home",
         icon: <SchoolIcon />,
         iconName: "graduation-cap",
-        requiresVPN: false,
+        requiresVPN: true,
         description: "Seminar schedules and registration",
       },
       {
