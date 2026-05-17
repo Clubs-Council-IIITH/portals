@@ -12,6 +12,7 @@ import VpnLockIcon from "@mui/icons-material/VpnLock";
 import CreditScoreIcon from "@mui/icons-material/CreditScore";
 import AndroidIcon from "@mui/icons-material/Android";
 import AppleIcon from "@mui/icons-material/Apple";
+import ForumIcon from '@mui/icons-material/Forum';
 
 const linkCategories = [
   {
@@ -131,6 +132,14 @@ const linkCategories = [
         requiresVPN: false,
         description: "Alumni portal",
       },
+      {
+        name: 'Discourse',
+        url: 'https://discourse.iiit.ac.in/',
+        icon: <ForumIcon />,
+        iconName: 'forum',
+        requiresVPN: true,
+        description: 'Community discussion forum',
+      }
     ],
   },
 ];
