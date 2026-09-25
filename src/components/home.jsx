@@ -325,10 +325,9 @@ export default function HomeComponent() {
                 >
                   Popular Portals
                 </Typography>
-                <Grid container spacing={4} justifyContent="center">
+                <Grid container spacing={4} sx={{justifyContent: "center" }}>
                   {popularPortals.map((portal, index) => (
                     <Grid
-                      item
                       key={index}
                       size={{
                         xs: 12,
@@ -562,10 +561,9 @@ export default function HomeComponent() {
                 >
                   Miscellaneous
                 </Typography>
-                <Grid container spacing={4} justifyContent="center">
+                <Grid container spacing={4} sx = {{justifyContent: "center"}}>
                   {Miscellaneous.map((portal, index) => (
                     <Grid
-                      item
                       key={index}
                       size={{
                         xs: 12,
