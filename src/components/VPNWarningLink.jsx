@@ -76,8 +76,8 @@ const VPNWarningLink = ({ link, ...buttonProps }) => {
         followCursor
         placement="top"
         arrow
-        TransitionProps={{ timeout: 300 }}
         slotProps={{
+          transition: { timeout: 300},
           tooltip: {
             sx: {
               backgroundColor: isDark
